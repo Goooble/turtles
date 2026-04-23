@@ -24,6 +24,7 @@ export default function NetworkMap() {
   const navigate = useNavigate()
   const [flights, setFlights] = useState<Flight[]>([])
   const [activeRegion, setActiveRegion] = useState('All')
+  const [searchQuery, setSearchQuery] = useState('')
   const [hoveredFlight, setHoveredFlight] = useState<Flight | null>(null)
 
   useEffect(() => {
@@ -45,10 +46,19 @@ export default function NetworkMap() {
     navigate('/booking', { state: { flight } })
   }
 
-  // Filter flights based on active region
+  // Filter flights based on active region and search query
   const visibleFlights = flights.filter(f => {
-    if (activeRegion === 'All') return true
-    return regionMap[f.to] === activeRegion
+    // Filter by Region
+    if (activeRegion !== 'All' && regionMap[f.to] !== activeRegion) return false
+    
+    // Filter by Search Input
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase()
+      // Match against the airport code
+      if (!f.to.toLowerCase().includes(query)) return false
+    }
+    
+    return true
   })
 
   return (
@@ -67,7 +77,13 @@ export default function NetworkMap() {
           <div className="network-search-divider">⇌</div>
           <div className="network-search-field network-search-dest">
             <span className="network-label">To</span>
-            <input type="text" placeholder="Where to?" className="network-input" />
+            <input 
+              type="text" 
+              placeholder="e.g. DXB or LHR" 
+              className="network-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
         </div>
 
@@ -100,8 +116,8 @@ export default function NetworkMap() {
 
             {/* Hub Marker (BOM) */}
             <Marker coordinates={coords.BOM}>
-              <circle r={6} fill="#8a1538" stroke="#fff" strokeWidth={2} />
-              <text textAnchor="middle" y={15} style={{ fontFamily: "Inter", fontSize: "8px", fill: "#333", fontWeight: 700 }}>
+              <circle r={6} fill="#0057B8" stroke="#fff" strokeWidth={2} />
+              <text textAnchor="middle" y={15} style={{ fontFamily: "Inter", fontSize: "8px", fill: "#0057B8", fontWeight: 700 }}>
                 Mumbai, India
               </text>
             </Marker>
@@ -112,7 +128,7 @@ export default function NetworkMap() {
               if (!destCoords) return null
 
               const isHovered = hoveredFlight?._id === flight._id
-              const lineColor = isHovered ? '#e12b5e' : 'rgba(138, 21, 56, 0.4)'
+              const lineColor = isHovered ? '#FFD700' : 'rgba(0, 87, 184, 0.4)'
 
               return (
                 <g key={flight._id}>
@@ -143,7 +159,7 @@ export default function NetworkMap() {
                   <Marker coordinates={destCoords}>
                     <circle 
                       r={isHovered ? 4 : 2.5} 
-                      fill="#8a1538" 
+                      fill={isHovered ? "#FFD700" : "#0057B8"} 
                       onClick={() => handleFlightClick(flight)}
                       onMouseEnter={() => setHoveredFlight(flight)}
                       onMouseLeave={() => setHoveredFlight(null)}
@@ -153,7 +169,7 @@ export default function NetworkMap() {
                       <text 
                         textAnchor="middle" 
                         y={-8} 
-                        style={{ fontFamily: "Inter", fontSize: "10px", fill: "#8a1538", fontWeight: 700, pointerEvents: 'none' }}
+                        style={{ fontFamily: "Inter", fontSize: "10px", fill: "#0057B8", fontWeight: 700, pointerEvents: 'none' }}
                       >
                         {flight.to}
                       </text>

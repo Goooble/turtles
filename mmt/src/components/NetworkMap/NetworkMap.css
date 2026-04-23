@@ -8,8 +8,8 @@
 
 .network-title {
   font-size: 2.2rem;
-  font-weight: 300;
-  color: #333;
+  font-weight: 700;
+  color: #0057B8;
   margin-bottom: 1.5rem;
   letter-spacing: -0.5px;
 }
@@ -41,6 +41,7 @@
   align-items: center;
   padding: 0.5rem 1.5rem;
   box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border: 2px solid #FFD700;
   z-index: 10;
   min-width: 450px;
 }
@@ -58,28 +59,30 @@
 
 .network-label {
   font-size: 0.8rem;
-  color: #888;
+  color: #0057B8;
+  font-weight: 600;
 }
 
 .network-value {
   font-size: 0.95rem;
-  font-weight: 600;
-  color: #333;
+  font-weight: 700;
+  color: #111;
 }
 
 .network-input {
+  background: transparent;
   border: none;
   outline: none;
   font-size: 0.95rem;
-  font-weight: 600;
-  color: #333;
+  font-weight: 700;
+  color: #111 !important;
   font-family: inherit;
   width: 100%;
 }
 
 .network-input::placeholder {
-  color: #aaa;
-  font-weight: 400;
+  color: #999 !important;
+  font-weight: 500;
 }
 
 .network-search-divider {
@@ -110,18 +113,18 @@
   border-radius: 999px;
   font-family: inherit;
   font-size: 0.85rem;
-  font-weight: 500;
-  color: #555;
+  font-weight: 600;
+  color: #0057B8;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .network-filter-btn:hover {
-  color: #333;
+  background: rgba(0, 87, 184, 0.08);
 }
 
 .network-filter-btn.active {
-  border: 1px solid #ddd;
-  color: #111;
-  font-weight: 600;
+  background: #0057B8;
+  color: #FFD700;
+  font-weight: 700;
 }
