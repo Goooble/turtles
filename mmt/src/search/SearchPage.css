@@ -4,7 +4,7 @@
 }
 
 .hero-section {
-  background: linear-gradient(to bottom, #f8fafc, #fff);
+  background: linear-gradient(135deg, #0057B8 0%, #003f8a 100%);
   padding: 5rem 2rem 4rem;
   text-align: center;
 }
@@ -12,14 +12,14 @@
 .hero-title {
   font-size: 3.5rem;
   font-weight: 700;
-  color: #111;
+  color: #FFD700;
   letter-spacing: -1.5px;
   margin-bottom: 1rem;
 }
 
 .hero-subtitle {
   font-size: 1.2rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: 3rem;
 }
 
@@ -31,8 +31,8 @@
   padding: 1rem;
   display: flex;
   align-items: center;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border: 2px solid #FFD700;
 }
 
 .search-input-group {
@@ -45,8 +45,8 @@
 
 .search-input-group label {
   font-size: 0.75rem;
-  font-weight: 600;
-  color: #888;
+  font-weight: 700;
+  color: #0057B8;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.25rem;
@@ -71,29 +71,30 @@
 .search-divider {
   width: 1px;
   height: 40px;
-  background: #eee;
+  background: #e0e0e0;
 }
 
 .btn-search {
-  background: #111;
+  background: #0057B8;
   color: white;
   border: none;
   padding: 1.25rem 2.5rem;
   border-radius: 16px;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
   margin-left: 1rem;
 }
 
 .btn-search:hover {
-  background: #8a1538;
+  background: #FFD700;
+  color: #0057B8;
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(138, 21, 56, 0.2);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
 }
 
 .map-section {
   padding: 2rem;
-  background: #fff;
+  background: #f4f7fc;
 }

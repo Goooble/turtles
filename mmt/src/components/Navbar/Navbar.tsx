@@ -24,11 +24,11 @@ export default function Navbar() {
           <span className="logo-icon">✈️</span>
           <span className="logo-text">AeroBook</span>
         </Link>
-        
+
         <div className="navbar-links">
           <Link to="/" className="nav-link">Search</Link>
           <Link to="/flights" className="nav-link">All Flights</Link>
-          
+
           {user ? (
             <div className="nav-user-menu">
               <Link to="/dashboard" className="nav-link dashboard-link">My Bookings</Link>
