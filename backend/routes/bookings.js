@@ -12,6 +12,8 @@ const bookingSchema = new mongoose.Schema(
   {
     userId:   { type: String, required: true },
     flightId: { type: mongoose.Schema.Types.ObjectId, ref: 'Flight', required: true },
+    flightClass: { type: String, enum: ['Economy', 'Economy Plus', 'Business'], required: true },
+    pricePaid: { type: Number, required: true },
     passenger: {
       name: { type: String, required: true },
       age:  { type: Number, required: true },
@@ -27,18 +29,20 @@ const Booking = mongoose.model('Booking', bookingSchema, 'bookings');
 // Returns: { message, booking }
 router.post('/', async (req, res) => {
   try {
-    const { userId, flightId, passenger } = req.body;
+    const { userId, flightId, flightClass, pricePaid, passenger } = req.body;
 
     // Basic validation
-    if (!userId || !flightId || !passenger?.name || !passenger?.age) {
+    if (!userId || !flightId || !flightClass || !pricePaid || !passenger?.name || !passenger?.age) {
       return res.status(400).json({
-        error: 'All fields are required: userId, flightId, passenger.name, passenger.age',
+        error: 'All fields are required: userId, flightId, flightClass, pricePaid, passenger.name, passenger.age',
       });
     }
 
     const newBooking = new Booking({
       userId,
       flightId,
+      flightClass,
+      pricePaid: Number(pricePaid),
       passenger: {
         name: passenger.name.trim(),
         age:  Number(passenger.age),

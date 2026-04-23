@@ -14,7 +14,11 @@ const flightSchema = new mongoose.Schema({
   date:          { type: String, required: true },  // "YYYY-MM-DD"
   departureTime: { type: String, required: true },  // "HH:MM"
   arrivalTime:   { type: String },                  // "HH:MM" (optional)
-  price:         { type: Number, required: true },
+  prices: {
+    economy: { type: Number, required: true },
+    economyPlus: { type: Number, required: true },
+    business: { type: Number, required: true }
+  },
 });
 
 const Flight = mongoose.model('Flight', flightSchema, 'flights');

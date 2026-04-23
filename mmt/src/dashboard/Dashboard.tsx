@@ -72,6 +72,17 @@ export default function Dashboard() {
               <div key={booking._id} className="booking-ticket">
                 <div className="ticket-header">
                   <span className="ticket-airline">{booking.flightId.airline}</span>
+                  <div className="ticket-class-badge" style={{ 
+                    background: booking.flightClass === 'Business' ? '#1a237e' : booking.flightClass === 'Economy Plus' ? '#ff9800' : '#0057B8',
+                    color: '#fff',
+                    padding: '2px 8px',
+                    borderRadius: '4px',
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase'
+                  }}>
+                    {booking.flightClass}
+                  </div>
                   <span className="ticket-date">{booking.flightId.date}</span>
                 </div>
                 
@@ -95,6 +106,10 @@ export default function Dashboard() {
                   <div className="passenger-info">
                     <span className="info-label">Passenger</span>
                     <span className="info-value">{booking.passenger.name}</span>
+                  </div>
+                  <div className="booking-ref">
+                    <span className="info-label">Price Paid</span>
+                    <span className="info-value" style={{ color: '#0057B8', fontWeight: 800 }}>₹{booking.pricePaid?.toLocaleString('en-IN') || 'N/A'}</span>
                   </div>
                   <div className="booking-ref">
                     <span className="info-label">Booking Ref</span>

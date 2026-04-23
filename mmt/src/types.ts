@@ -8,12 +8,18 @@ export interface Flight {
   date: string
   departureTime: string
   arrivalTime?: string
-  price: number
+  prices: {
+    economy: number
+    economyPlus: number
+    business: number
+  }
 }
 
 export interface BookingPayload {
   flightId: string
   userId: string | null
+  flightClass: string
+  pricePaid: number
   passenger: {
     name: string
     age: number
@@ -22,8 +28,10 @@ export interface BookingPayload {
 
 export interface Booking {
   _id: string
-  flightId: string
+  flightId: Flight
   userId: string
+  flightClass: string
+  pricePaid: number
   passenger: {
     name: string
     age: number

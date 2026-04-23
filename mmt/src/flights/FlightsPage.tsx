@@ -100,8 +100,8 @@ function FlightsPage() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleBook = (flight: Flight) => {
-    navigate('/booking', { state: { flight } })
+  const handleBook = (flight: Flight, selectedClass: string, pricePaid: number) => {
+    navigate('/booking', { state: { flight, selectedClass, pricePaid } })
   }
 
   // ── Render ──────────────────────────────────────────────────────────────────
@@ -206,23 +206,34 @@ function FlightsPage() {
                       <span className="fp-card__detail-label">📅 Date</span>
                       <span className="fp-card__detail-value">{flight.date}</span>
                     </div>
-                    <div className="fp-card__detail fp-card__detail--price">
-                      <span className="fp-card__detail-label">Price</span>
-                      <span className="fp-card__price">
-                        ₹{flight.price.toLocaleString('en-IN')}
-                      </span>
-                    </div>
                   </div>
 
-                  {/* Book button */}
-                  <button
-                    id={`book-btn-${flight._id}`}
-                    className="fp-card__book-btn"
-                    onClick={() => handleBook(flight)}
-                    aria-label={`Book ${flight.airline} flight from ${flight.from} to ${flight.to}`}
-                  >
-                    Book Now
-                  </button>
+                  {/* Pricing Tiers & Booking */}
+                  <div className="fp-card__tiers">
+                    <button 
+                      className="fp-tier-btn"
+                      onClick={() => handleBook(flight, 'Economy', flight.prices.economy)}
+                    >
+                      <span className="fp-tier-name">Economy</span>
+                      <span className="fp-tier-price">₹{flight.prices.economy.toLocaleString('en-IN')}</span>
+                    </button>
+                    
+                    <button 
+                      className="fp-tier-btn fp-tier-btn--plus"
+                      onClick={() => handleBook(flight, 'Economy Plus', flight.prices.economyPlus)}
+                    >
+                      <span className="fp-tier-name">Economy Plus</span>
+                      <span className="fp-tier-price">₹{flight.prices.economyPlus.toLocaleString('en-IN')}</span>
+                    </button>
+                    
+                    <button 
+                      className="fp-tier-btn fp-tier-btn--business"
+                      onClick={() => handleBook(flight, 'Business', flight.prices.business)}
+                    >
+                      <span className="fp-tier-name">Business</span>
+                      <span className="fp-tier-price">₹{flight.prices.business.toLocaleString('en-IN')}</span>
+                    </button>
+                  </div>
                 </li>
               )
             })}

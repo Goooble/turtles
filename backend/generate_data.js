@@ -133,10 +133,25 @@ const cities = [
 
 const airlines = ['IndiGo', 'Air India', 'Vistara', 'SpiceJet', 'Emirates', 'Qatar Airways', 'Lufthansa', 'British Airways', 'Singapore Airlines', 'United Airlines', 'Air France'];
 
+// Helper to calculate distance in km using Haversine formula
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Radius of the earth in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;  // deg2rad below
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    0.5 - Math.cos(dLat)/2 + 
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+    (1 - Math.cos(dLon))/2;
+  return R * 2 * Math.asin(Math.sqrt(a));
+}
+
 function generateFlights() {
   const flights = [];
   const flightCount = 200; // We want exactly 200 additional flights
   const startDate = new Date('2026-05-01');
+  
+  const bomLat = 19.0760;
+  const bomLng = 72.8777;
 
   for (let i = 0; i < flightCount; i++) {
     // Generate a flight from BOM to a random city (excluding BOM)
@@ -147,7 +162,17 @@ function generateFlights() {
     }
 
     const airline = airlines[Math.floor(Math.random() * airlines.length)];
-    const price = Math.floor(Math.random() * (150000 - 4000) + 4000);
+    
+    // Calculate realistic base price based on distance
+    const distance = calculateDistance(bomLat, bomLng, toCity.lat, toCity.lng);
+    // Base rate: roughly ₹5 per km + ₹1500 base fee
+    const basePrice = Math.floor(1500 + (distance * 5));
+    
+    const prices = {
+      economy: basePrice,
+      economyPlus: Math.floor(basePrice * 1.5),
+      business: Math.floor(basePrice * 3.5)
+    };
     
     // Add random days
     const flightDate = new Date(startDate);
@@ -167,7 +192,7 @@ function generateFlights() {
       date: flightDate.toISOString().split('T')[0],
       departureTime: `${depHour}:${depMin}`,
       arrivalTime: `${arrHour}:${arrMin}`,
-      price
+      prices
     });
   }
   return flights;
@@ -185,12 +210,18 @@ const flightSchema = new mongoose.Schema({
   date: String,
   departureTime: String,
   arrivalTime: String,
-  price: Number
+  prices: {
+    economy: Number,
+    economyPlus: Number,
+    business: Number
+  }
 });
 
 const bookingSchema = new mongoose.Schema({
   flightId: String,
   userId: String,
+  flightClass: String,
+  pricePaid: Number,
   passenger: {
     name: String,
     age: Number

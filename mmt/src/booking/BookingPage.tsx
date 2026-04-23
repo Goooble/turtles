@@ -43,6 +43,8 @@ interface PassengerForm {
 // ── Router location state (what Student 2 passes when "Book" is clicked) ───
 interface LocationState {
   flight: Flight
+  selectedClass: string
+  pricePaid: number
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -55,6 +57,8 @@ function BookingPage() {
   // Pull the selected flight from router state
   const state = location.state as LocationState | null
   const flight = state?.flight
+  const selectedClass = state?.selectedClass || 'Economy'
+  const pricePaid = state?.pricePaid || flight?.prices?.economy || 0
 
   const [passenger, setPassenger] = useState<PassengerForm>({ name: '', age: '' })
   const [loading, setLoading] = useState(false)
@@ -112,6 +116,8 @@ function BookingPage() {
       flightId: flight._id,
       // userId comes from AuthContext
       userId: user!._id,
+      flightClass: selectedClass,
+      pricePaid: pricePaid,
       passenger: {
         name: passenger.name.trim(),
         age: Number(passenger.age),
@@ -153,6 +159,9 @@ function BookingPage() {
             Flight: <strong>{flight.airline}</strong> on{' '}
             <strong>{flight.date}</strong>
           </p>
+          <p className="success-detail">
+            Class: <strong>{selectedClass}</strong>
+          </p>
           <button
             className="btn-primary"
             onClick={() => navigate('/')}
@@ -184,6 +193,10 @@ function BookingPage() {
         <h2 className="card-heading">Selected Flight</h2>
         <div className="flight-grid">
           <div className="flight-field">
+            <span className="field-label">Class</span>
+            <span className="field-value" style={{ color: '#0057B8', fontWeight: 'bold' }}>{selectedClass}</span>
+          </div>
+          <div className="flight-field">
             <span className="field-label">Airline</span>
             <span className="field-value">{flight.airline}</span>
           </div>
@@ -210,9 +223,9 @@ function BookingPage() {
         </div>
         {/* Price shown separately and larger */}
         <div className="flight-price-row">
-          <span className="field-label">Total Price</span>
+          <span className="field-label">Total Price ({selectedClass})</span>
           <span className="price-amount">
-            ₹{flight.price.toLocaleString('en-IN')}
+            ₹{pricePaid.toLocaleString('en-IN')}
           </span>
         </div>
       </section>

@@ -8,12 +8,18 @@ const flightSchema = new mongoose.Schema({
   date: String,
   departureTime: String,
   arrivalTime: String,
-  price: Number
+  prices: {
+    economy: Number,
+    economyPlus: Number,
+    business: Number
+  }
 });
 
 const bookingSchema = new mongoose.Schema({
   flightId: String,
   userId: String,
+  flightClass: String,
+  pricePaid: Number,
   passenger: {
     name: String,
     age: Number
@@ -29,1802 +35,2602 @@ const dummyFlights = [
   {
     "airline": "Lufthansa",
     "from": "BOM",
-    "to": "NBO",
-    "date": "2026-05-10",
-    "departureTime": "20:38",
-    "arrivalTime": "10:20",
-    "price": 107647
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "GAU",
-    "date": "2026-05-29",
-    "departureTime": "19:51",
-    "arrivalTime": "18:33",
-    "price": 43131
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "EZE",
-    "date": "2026-05-11",
-    "departureTime": "23:30",
-    "arrivalTime": "20:18",
-    "price": 65393
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "IST",
-    "date": "2026-05-17",
-    "departureTime": "23:29",
-    "arrivalTime": "06:02",
-    "price": 121490
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "SCL",
-    "date": "2026-05-11",
-    "departureTime": "13:56",
-    "arrivalTime": "03:28",
-    "price": 128849
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "DTW",
-    "date": "2026-05-08",
-    "departureTime": "04:00",
-    "arrivalTime": "17:13",
-    "price": 38749
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "MAA",
-    "date": "2026-05-03",
-    "departureTime": "08:13",
-    "arrivalTime": "14:08",
-    "price": 20343
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "YVR",
-    "date": "2026-05-14",
-    "departureTime": "03:04",
-    "arrivalTime": "17:09",
-    "price": 69640
+    "to": "TRV",
+    "date": "2026-05-18",
+    "departureTime": "12:42",
+    "arrivalTime": "06:41",
+    "prices": {
+      "economy": 7761,
+      "economyPlus": 11641,
+      "business": 27163
+    }
   },
   {
     "airline": "Qatar Airways",
     "from": "BOM",
     "to": "CAI",
-    "date": "2026-05-27",
-    "departureTime": "20:43",
-    "arrivalTime": "09:04",
-    "price": 147878
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "VIE",
-    "date": "2026-05-30",
-    "departureTime": "04:25",
-    "arrivalTime": "07:55",
-    "price": 137427
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "BUD",
-    "date": "2026-05-03",
-    "departureTime": "08:05",
-    "arrivalTime": "11:30",
-    "price": 143325
+    "date": "2026-05-21",
+    "departureTime": "18:59",
+    "arrivalTime": "05:34",
+    "prices": {
+      "economy": 23214,
+      "economyPlus": 34821,
+      "business": 81249
+    }
   },
   {
     "airline": "Lufthansa",
     "from": "BOM",
-    "to": "COK",
-    "date": "2026-05-19",
-    "departureTime": "21:51",
-    "arrivalTime": "11:14",
-    "price": 119644
+    "to": "CPH",
+    "date": "2026-05-11",
+    "departureTime": "04:27",
+    "arrivalTime": "09:22",
+    "prices": {
+      "economy": 33565,
+      "economyPlus": 50347,
+      "business": 117477
+    }
   },
   {
-    "airline": "Emirates",
+    "airline": "Lufthansa",
     "from": "BOM",
-    "to": "BHO",
-    "date": "2026-05-14",
-    "departureTime": "22:05",
-    "arrivalTime": "06:25",
-    "price": 22091
+    "to": "LIM",
+    "date": "2026-05-21",
+    "departureTime": "20:43",
+    "arrivalTime": "13:36",
+    "prices": {
+      "economy": 85056,
+      "economyPlus": 127584,
+      "business": 297696
+    }
   },
   {
     "airline": "British Airways",
     "from": "BOM",
-    "to": "DEN",
-    "date": "2026-05-04",
-    "departureTime": "05:53",
-    "arrivalTime": "16:23",
-    "price": 102244
+    "to": "NAG",
+    "date": "2026-05-24",
+    "departureTime": "21:19",
+    "arrivalTime": "22:01",
+    "prices": {
+      "economy": 4940,
+      "economyPlus": 7410,
+      "business": 17290
+    }
   },
   {
-    "airline": "Lufthansa",
+    "airline": "Air France",
     "from": "BOM",
-    "to": "PTY",
-    "date": "2026-05-21",
-    "departureTime": "01:17",
-    "arrivalTime": "00:46",
-    "price": 127910
+    "to": "AMS",
+    "date": "2026-05-19",
+    "departureTime": "12:35",
+    "arrivalTime": "05:43",
+    "prices": {
+      "economy": 35804,
+      "economyPlus": 53706,
+      "business": 125314
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "JFK",
+    "date": "2026-05-15",
+    "departureTime": "02:37",
+    "arrivalTime": "08:51",
+    "prices": {
+      "economy": 64169,
+      "economyPlus": 96253,
+      "business": 224591
+    }
   },
   {
     "airline": "IndiGo",
     "from": "BOM",
-    "to": "IXR",
-    "date": "2026-05-27",
-    "departureTime": "02:43",
-    "arrivalTime": "16:37",
-    "price": 100977
+    "to": "YVR",
+    "date": "2026-05-03",
+    "departureTime": "02:34",
+    "arrivalTime": "05:50",
+    "prices": {
+      "economy": 62795,
+      "economyPlus": 94192,
+      "business": 219782
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "BRU",
+    "date": "2026-05-07",
+    "departureTime": "09:12",
+    "arrivalTime": "22:54",
+    "prices": {
+      "economy": 35838,
+      "economyPlus": 53757,
+      "business": 125433
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "MIA",
+    "date": "2026-05-23",
+    "departureTime": "00:30",
+    "arrivalTime": "15:22",
+    "prices": {
+      "economy": 72720,
+      "economyPlus": 109080,
+      "business": 254520
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "MEX",
+    "date": "2026-05-03",
+    "departureTime": "00:56",
+    "arrivalTime": "09:25",
+    "prices": {
+      "economy": 79718,
+      "economyPlus": 119577,
+      "business": 279013
+    }
   },
   {
     "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "GOI",
+    "date": "2026-05-21",
+    "departureTime": "03:43",
+    "arrivalTime": "20:19",
+    "prices": {
+      "economy": 3614,
+      "economyPlus": 5421,
+      "business": 12649
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "IDR",
+    "date": "2026-05-21",
+    "departureTime": "01:45",
+    "arrivalTime": "09:32",
+    "prices": {
+      "economy": 4049,
+      "economyPlus": 6073,
+      "business": 14171
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "CAI",
+    "date": "2026-05-13",
+    "departureTime": "13:07",
+    "arrivalTime": "16:42",
+    "prices": {
+      "economy": 23214,
+      "economyPlus": 34821,
+      "business": 81249
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "RPR",
+    "date": "2026-05-06",
+    "departureTime": "18:34",
+    "arrivalTime": "15:17",
+    "prices": {
+      "economy": 6224,
+      "economyPlus": 9336,
+      "business": 21784
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "NBO",
+    "date": "2026-05-19",
+    "departureTime": "03:49",
+    "arrivalTime": "18:39",
+    "prices": {
+      "economy": 24166,
+      "economyPlus": 36249,
+      "business": 84581
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "GRU",
+    "date": "2026-05-30",
+    "departureTime": "02:04",
+    "arrivalTime": "10:46",
+    "prices": {
+      "economy": 70280,
+      "economyPlus": 105420,
+      "business": 245980
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "JAI",
+    "date": "2026-05-06",
+    "departureTime": "11:51",
+    "arrivalTime": "18:25",
+    "prices": {
+      "economy": 6103,
+      "economyPlus": 9154,
+      "business": 21360
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "HKG",
+    "date": "2026-05-27",
+    "departureTime": "22:47",
+    "arrivalTime": "13:08",
+    "prices": {
+      "economy": 22855,
+      "economyPlus": 34282,
+      "business": 79992
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "BHO",
+    "date": "2026-05-19",
+    "departureTime": "23:59",
+    "arrivalTime": "15:30",
+    "prices": {
+      "economy": 4806,
+      "economyPlus": 7209,
+      "business": 16821
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "MCT",
+    "date": "2026-05-17",
+    "departureTime": "11:02",
+    "arrivalTime": "17:40",
+    "prices": {
+      "economy": 9458,
+      "economyPlus": 14187,
+      "business": 33103
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "ORD",
+    "date": "2026-05-01",
+    "departureTime": "17:16",
+    "arrivalTime": "13:26",
+    "prices": {
+      "economy": 66224,
+      "economyPlus": 99336,
+      "business": 231784
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "PHL",
+    "date": "2026-05-17",
+    "departureTime": "03:01",
+    "arrivalTime": "10:41",
+    "prices": {
+      "economy": 64869,
+      "economyPlus": 97303,
+      "business": 227041
+    }
+  },
+  {
+    "airline": "Vistara",
     "from": "BOM",
     "to": "FRA",
     "date": "2026-05-11",
-    "departureTime": "20:18",
-    "arrivalTime": "19:23",
-    "price": 72138
+    "departureTime": "14:38",
+    "arrivalTime": "20:56",
+    "prices": {
+      "economy": 34353,
+      "economyPlus": 51529,
+      "business": 120235
+    }
   },
   {
-    "airline": "Lufthansa",
+    "airline": "Vistara",
     "from": "BOM",
-    "to": "SEA",
-    "date": "2026-05-13",
-    "departureTime": "01:50",
-    "arrivalTime": "10:56",
-    "price": 131018
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "YVR",
-    "date": "2026-05-30",
-    "departureTime": "17:02",
-    "arrivalTime": "05:04",
-    "price": 123101
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "IAD",
-    "date": "2026-05-27",
-    "departureTime": "03:16",
-    "arrivalTime": "04:19",
-    "price": 44159
+    "to": "CMB",
+    "date": "2026-05-24",
+    "departureTime": "06:52",
+    "arrivalTime": "05:55",
+    "prices": {
+      "economy": 9120,
+      "economyPlus": 13680,
+      "business": 31920
+    }
   },
   {
     "airline": "Air India",
-    "from": "BOM",
-    "to": "GAU",
-    "date": "2026-05-13",
-    "departureTime": "04:50",
-    "arrivalTime": "05:29",
-    "price": 133529
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "SYD",
-    "date": "2026-05-19",
-    "departureTime": "07:36",
-    "arrivalTime": "07:33",
-    "price": 44868
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "IAH",
-    "date": "2026-05-10",
-    "departureTime": "23:21",
-    "arrivalTime": "16:20",
-    "price": 79354
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "WAW",
-    "date": "2026-05-09",
-    "departureTime": "15:51",
-    "arrivalTime": "06:11",
-    "price": 88363
-  },
-  {
-    "airline": "Lufthansa",
     "from": "BOM",
     "to": "AMM",
-    "date": "2026-05-08",
-    "departureTime": "10:06",
-    "arrivalTime": "05:51",
-    "price": 60185
+    "date": "2026-05-01",
+    "departureTime": "04:14",
+    "arrivalTime": "14:47",
+    "prices": {
+      "economy": 21197,
+      "economyPlus": 31795,
+      "business": 74189
+    }
   },
   {
     "airline": "Emirates",
-    "from": "BOM",
-    "to": "SVO",
-    "date": "2026-05-26",
-    "departureTime": "10:52",
-    "arrivalTime": "06:15",
-    "price": 123370
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "JLR",
-    "date": "2026-05-20",
-    "departureTime": "22:39",
-    "arrivalTime": "12:58",
-    "price": 86306
-  },
-  {
-    "airline": "Emirates",
-    "from": "BOM",
-    "to": "JNB",
-    "date": "2026-05-26",
-    "departureTime": "00:12",
-    "arrivalTime": "07:40",
-    "price": 144883
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "AUH",
-    "date": "2026-05-02",
-    "departureTime": "20:46",
-    "arrivalTime": "02:16",
-    "price": 40808
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "ATH",
-    "date": "2026-05-05",
-    "departureTime": "07:21",
-    "arrivalTime": "00:53",
-    "price": 68645
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "DSS",
-    "date": "2026-05-30",
-    "departureTime": "11:06",
-    "arrivalTime": "06:27",
-    "price": 113891
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "BBI",
-    "date": "2026-05-15",
-    "departureTime": "14:19",
-    "arrivalTime": "19:56",
-    "price": 66206
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "HYD",
-    "date": "2026-05-18",
-    "departureTime": "07:27",
-    "arrivalTime": "16:22",
-    "price": 92562
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "BHO",
-    "date": "2026-05-29",
-    "departureTime": "23:41",
-    "arrivalTime": "13:16",
-    "price": 96674
-  },
-  {
-    "airline": "Singapore Airlines",
     "from": "BOM",
     "to": "CMN",
-    "date": "2026-05-26",
-    "departureTime": "05:55",
-    "arrivalTime": "18:01",
-    "price": 28582
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "BOG",
-    "date": "2026-05-19",
-    "departureTime": "16:58",
-    "arrivalTime": "16:28",
-    "price": 95872
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "JFK",
-    "date": "2026-05-17",
-    "departureTime": "23:42",
-    "arrivalTime": "13:25",
-    "price": 134408
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "LHR",
-    "date": "2026-05-24",
-    "departureTime": "20:17",
-    "arrivalTime": "13:11",
-    "price": 8501
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "GRU",
-    "date": "2026-05-14",
-    "departureTime": "02:44",
-    "arrivalTime": "08:13",
-    "price": 69592
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "DFW",
-    "date": "2026-05-13",
-    "departureTime": "14:02",
-    "arrivalTime": "01:57",
-    "price": 52312
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "IDR",
-    "date": "2026-05-04",
-    "departureTime": "03:24",
-    "arrivalTime": "06:49",
-    "price": 105805
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "UDR",
-    "date": "2026-05-30",
-    "departureTime": "14:14",
-    "arrivalTime": "23:50",
-    "price": 135710
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "IXB",
-    "date": "2026-05-11",
-    "departureTime": "12:14",
-    "arrivalTime": "23:23",
-    "price": 84560
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "OPO",
-    "date": "2026-05-15",
-    "departureTime": "19:16",
-    "arrivalTime": "08:47",
-    "price": 37944
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "VTZ",
-    "date": "2026-05-03",
-    "departureTime": "15:15",
-    "arrivalTime": "12:15",
-    "price": 109855
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "NRT",
-    "date": "2026-05-04",
-    "departureTime": "15:36",
-    "arrivalTime": "22:38",
-    "price": 87048
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "PEK",
-    "date": "2026-05-30",
-    "departureTime": "09:40",
-    "arrivalTime": "18:29",
-    "price": 108645
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "PEK",
-    "date": "2026-05-03",
-    "departureTime": "16:59",
-    "arrivalTime": "04:09",
-    "price": 20953
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "DSS",
-    "date": "2026-05-16",
-    "departureTime": "23:02",
-    "arrivalTime": "20:42",
-    "price": 131017
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "HYD",
-    "date": "2026-05-26",
-    "departureTime": "02:01",
-    "arrivalTime": "21:31",
-    "price": 62178
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "BOG",
-    "date": "2026-05-25",
-    "departureTime": "19:27",
-    "arrivalTime": "19:39",
-    "price": 64733
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "MNL",
-    "date": "2026-05-23",
-    "departureTime": "23:45",
-    "arrivalTime": "08:38",
-    "price": 117974
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "ATQ",
-    "date": "2026-05-18",
-    "departureTime": "17:52",
-    "arrivalTime": "14:01",
-    "price": 30675
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "BBI",
-    "date": "2026-05-17",
-    "departureTime": "06:29",
-    "arrivalTime": "06:10",
-    "price": 52676
-  },
-  {
-    "airline": "Emirates",
-    "from": "BOM",
-    "to": "DFW",
-    "date": "2026-05-23",
-    "departureTime": "11:42",
-    "arrivalTime": "13:28",
-    "price": 144450
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "IXC",
     "date": "2026-05-08",
-    "departureTime": "06:08",
-    "arrivalTime": "04:11",
-    "price": 47083
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "RPR",
-    "date": "2026-05-19",
-    "departureTime": "15:36",
-    "arrivalTime": "10:32",
-    "price": 101470
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "AMS",
-    "date": "2026-05-03",
-    "departureTime": "23:16",
-    "arrivalTime": "19:06",
-    "price": 18436
-  },
-  {
-    "airline": "Emirates",
-    "from": "BOM",
-    "to": "BNE",
-    "date": "2026-05-14",
-    "departureTime": "13:26",
-    "arrivalTime": "13:20",
-    "price": 108423
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "SIN",
-    "date": "2026-05-06",
-    "departureTime": "00:05",
-    "arrivalTime": "21:36",
-    "price": 89373
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "LIM",
-    "date": "2026-05-11",
-    "departureTime": "19:42",
-    "arrivalTime": "03:55",
-    "price": 47451
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "PRG",
-    "date": "2026-05-24",
-    "departureTime": "01:12",
-    "arrivalTime": "17:49",
-    "price": 11924
+    "departureTime": "07:11",
+    "arrivalTime": "17:56",
+    "prices": {
+      "economy": 41481,
+      "economyPlus": 62221,
+      "business": 145183
+    }
   },
   {
     "airline": "United Airlines",
     "from": "BOM",
-    "to": "CDG",
-    "date": "2026-05-17",
-    "departureTime": "18:53",
-    "arrivalTime": "20:21",
-    "price": 64635
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "BBI",
-    "date": "2026-05-07",
-    "departureTime": "21:34",
-    "arrivalTime": "12:21",
-    "price": 86363
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "CDG",
-    "date": "2026-05-29",
-    "departureTime": "08:19",
-    "arrivalTime": "01:07",
-    "price": 46878
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "LIS",
-    "date": "2026-05-04",
-    "departureTime": "10:31",
-    "arrivalTime": "05:41",
-    "price": 26255
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "BAH",
-    "date": "2026-05-05",
-    "departureTime": "17:36",
-    "arrivalTime": "08:09",
-    "price": 107763
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "BKK",
-    "date": "2026-05-08",
-    "departureTime": "12:21",
-    "arrivalTime": "13:42",
-    "price": 145848
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "MXP",
-    "date": "2026-05-22",
-    "departureTime": "22:56",
-    "arrivalTime": "15:30",
-    "price": 14201
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "BAH",
-    "date": "2026-05-25",
-    "departureTime": "18:45",
-    "arrivalTime": "06:59",
-    "price": 34705
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "IAD",
-    "date": "2026-05-23",
-    "departureTime": "17:49",
-    "arrivalTime": "05:44",
-    "price": 140177
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "PTY",
-    "date": "2026-05-03",
-    "departureTime": "21:23",
-    "arrivalTime": "13:39",
-    "price": 107799
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "DTW",
-    "date": "2026-05-23",
-    "departureTime": "19:58",
-    "arrivalTime": "01:38",
-    "price": 129560
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "IST",
-    "date": "2026-05-04",
-    "departureTime": "22:02",
-    "arrivalTime": "15:27",
-    "price": 121711
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "WAW",
-    "date": "2026-05-16",
-    "departureTime": "15:41",
-    "arrivalTime": "17:14",
-    "price": 41119
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "SYD",
-    "date": "2026-05-19",
-    "departureTime": "08:34",
-    "arrivalTime": "07:28",
-    "price": 90768
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "GAU",
-    "date": "2026-05-26",
-    "departureTime": "12:28",
-    "arrivalTime": "09:13",
-    "price": 50794
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "GVA",
-    "date": "2026-05-09",
-    "departureTime": "16:16",
-    "arrivalTime": "22:53",
-    "price": 135729
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "GVA",
-    "date": "2026-05-21",
-    "departureTime": "18:20",
-    "arrivalTime": "12:52",
-    "price": 48002
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "JAI",
-    "date": "2026-05-22",
-    "departureTime": "11:18",
-    "arrivalTime": "12:55",
-    "price": 42411
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "AMS",
-    "date": "2026-05-08",
-    "departureTime": "19:37",
-    "arrivalTime": "21:17",
-    "price": 77579
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "CAI",
-    "date": "2026-05-02",
-    "departureTime": "11:18",
-    "arrivalTime": "14:54",
-    "price": 123114
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "VIE",
-    "date": "2026-05-25",
-    "departureTime": "15:32",
-    "arrivalTime": "23:50",
-    "price": 21266
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "JNB",
-    "date": "2026-05-23",
-    "departureTime": "00:47",
-    "arrivalTime": "05:33",
-    "price": 85765
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "PHL",
-    "date": "2026-05-10",
-    "departureTime": "04:54",
-    "arrivalTime": "05:19",
-    "price": 130174
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "YYZ",
-    "date": "2026-05-06",
-    "departureTime": "16:39",
-    "arrivalTime": "00:31",
-    "price": 22596
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "JNB",
-    "date": "2026-05-11",
-    "departureTime": "09:42",
-    "arrivalTime": "03:11",
-    "price": 8701
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "BNE",
-    "date": "2026-05-20",
-    "departureTime": "20:08",
-    "arrivalTime": "10:43",
-    "price": 143916
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "ICN",
-    "date": "2026-05-09",
-    "departureTime": "14:09",
-    "arrivalTime": "08:46",
-    "price": 94753
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "JFK",
-    "date": "2026-05-13",
-    "departureTime": "19:30",
-    "arrivalTime": "05:45",
-    "price": 35518
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "VTZ",
-    "date": "2026-05-10",
-    "departureTime": "06:25",
-    "arrivalTime": "23:25",
-    "price": 13492
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "TLV",
-    "date": "2026-05-23",
-    "departureTime": "22:37",
-    "arrivalTime": "13:42",
-    "price": 54523
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "AMS",
-    "date": "2026-05-10",
-    "departureTime": "22:44",
-    "arrivalTime": "09:47",
-    "price": 20365
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "YVR",
-    "date": "2026-05-03",
-    "departureTime": "19:07",
-    "arrivalTime": "20:13",
-    "price": 56596
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "DTW",
-    "date": "2026-05-15",
-    "departureTime": "02:43",
-    "arrivalTime": "08:05",
-    "price": 57507
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "OPO",
-    "date": "2026-05-05",
-    "departureTime": "23:11",
-    "arrivalTime": "09:37",
-    "price": 134430
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "TRV",
+    "to": "MCO",
     "date": "2026-05-01",
-    "departureTime": "15:51",
-    "arrivalTime": "16:34",
-    "price": 73768
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "CPH",
-    "date": "2026-05-13",
-    "departureTime": "01:18",
-    "arrivalTime": "19:40",
-    "price": 115492
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "MXP",
-    "date": "2026-05-09",
-    "departureTime": "21:18",
-    "arrivalTime": "23:32",
-    "price": 70122
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "EWR",
-    "date": "2026-05-07",
-    "departureTime": "16:29",
-    "arrivalTime": "19:43",
-    "price": 67463
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "BKK",
-    "date": "2026-05-01",
-    "departureTime": "12:27",
-    "arrivalTime": "22:52",
-    "price": 67019
-  },
-  {
-    "airline": "Emirates",
-    "from": "BOM",
-    "to": "VIE",
-    "date": "2026-05-04",
-    "departureTime": "01:03",
-    "arrivalTime": "15:30",
-    "price": 112693
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "ICN",
-    "date": "2026-05-02",
-    "departureTime": "00:07",
-    "arrivalTime": "02:16",
-    "price": 109954
-  },
-  {
-    "airline": "Emirates",
-    "from": "BOM",
-    "to": "YYZ",
-    "date": "2026-05-14",
-    "departureTime": "05:07",
-    "arrivalTime": "11:11",
-    "price": 13156
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "DTW",
-    "date": "2026-05-20",
-    "departureTime": "05:02",
-    "arrivalTime": "20:59",
-    "price": 88984
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "IXB",
-    "date": "2026-05-25",
-    "departureTime": "17:12",
-    "arrivalTime": "02:02",
-    "price": 38470
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "AMS",
-    "date": "2026-05-21",
-    "departureTime": "20:23",
-    "arrivalTime": "03:10",
-    "price": 95883
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "ARN",
-    "date": "2026-05-24",
-    "departureTime": "23:50",
-    "arrivalTime": "13:44",
-    "price": 78577
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "CPT",
-    "date": "2026-05-13",
-    "departureTime": "14:24",
-    "arrivalTime": "10:40",
-    "price": 12858
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "OSL",
-    "date": "2026-05-03",
-    "departureTime": "07:38",
-    "arrivalTime": "04:21",
-    "price": 130822
-  },
-  {
-    "airline": "Emirates",
-    "from": "BOM",
-    "to": "IST",
-    "date": "2026-05-29",
-    "departureTime": "09:49",
-    "arrivalTime": "01:37",
-    "price": 52331
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "VNS",
-    "date": "2026-05-09",
-    "departureTime": "06:33",
-    "arrivalTime": "11:32",
-    "price": 131019
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "VTZ",
-    "date": "2026-05-23",
-    "departureTime": "20:27",
-    "arrivalTime": "05:22",
-    "price": 19377
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "TRV",
-    "date": "2026-05-21",
-    "departureTime": "02:01",
-    "arrivalTime": "14:12",
-    "price": 12702
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "IAH",
-    "date": "2026-05-03",
-    "departureTime": "18:33",
-    "arrivalTime": "09:27",
-    "price": 71721
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "GVA",
-    "date": "2026-05-11",
-    "departureTime": "23:02",
-    "arrivalTime": "07:37",
-    "price": 134806
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "ADD",
-    "date": "2026-05-09",
-    "departureTime": "23:29",
-    "arrivalTime": "18:29",
-    "price": 33863
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "KTM",
-    "date": "2026-05-27",
-    "departureTime": "15:32",
-    "arrivalTime": "10:37",
-    "price": 49395
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "IXR",
-    "date": "2026-05-10",
-    "departureTime": "11:42",
-    "arrivalTime": "10:21",
-    "price": 32662
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "EWR",
-    "date": "2026-05-28",
-    "departureTime": "11:34",
-    "arrivalTime": "02:30",
-    "price": 110297
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "MIA",
-    "date": "2026-05-03",
-    "departureTime": "00:12",
-    "arrivalTime": "22:14",
-    "price": 141505
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "IAH",
-    "date": "2026-05-15",
-    "departureTime": "21:53",
-    "arrivalTime": "10:00",
-    "price": 96490
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "WAW",
-    "date": "2026-05-02",
-    "departureTime": "18:20",
-    "arrivalTime": "12:34",
-    "price": 45105
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "TRV",
-    "date": "2026-05-23",
-    "departureTime": "22:34",
-    "arrivalTime": "00:39",
-    "price": 80966
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "SEA",
-    "date": "2026-05-09",
-    "departureTime": "04:13",
-    "arrivalTime": "09:13",
-    "price": 129315
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "GVA",
-    "date": "2026-05-05",
-    "departureTime": "23:15",
-    "arrivalTime": "00:50",
-    "price": 126989
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "AUH",
-    "date": "2026-05-03",
-    "departureTime": "16:55",
-    "arrivalTime": "13:58",
-    "price": 39622
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "PVG",
-    "date": "2026-05-12",
-    "departureTime": "09:12",
-    "arrivalTime": "00:45",
-    "price": 29695
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "PRG",
-    "date": "2026-05-29",
-    "departureTime": "16:49",
-    "arrivalTime": "08:18",
-    "price": 133795
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "DUB",
-    "date": "2026-05-03",
-    "departureTime": "21:00",
-    "arrivalTime": "21:35",
-    "price": 122475
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "DEN",
-    "date": "2026-05-20",
-    "departureTime": "23:10",
-    "arrivalTime": "19:50",
-    "price": 69347
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "MCT",
-    "date": "2026-05-03",
-    "departureTime": "17:34",
-    "arrivalTime": "02:36",
-    "price": 53937
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "MNL",
-    "date": "2026-05-20",
-    "departureTime": "04:40",
-    "arrivalTime": "00:30",
-    "price": 39696
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "JDH",
-    "date": "2026-05-08",
-    "departureTime": "15:36",
-    "arrivalTime": "00:21",
-    "price": 70498
+    "departureTime": "12:01",
+    "arrivalTime": "15:09",
+    "prices": {
+      "economy": 71741,
+      "economyPlus": 107611,
+      "business": 251093
+    }
   },
   {
     "airline": "Lufthansa",
     "from": "BOM",
     "to": "ORD",
-    "date": "2026-05-07",
-    "departureTime": "07:41",
-    "arrivalTime": "16:46",
-    "price": 143163
+    "date": "2026-05-02",
+    "departureTime": "16:06",
+    "arrivalTime": "07:24",
+    "prices": {
+      "economy": 66224,
+      "economyPlus": 99336,
+      "business": 231784
+    }
   },
   {
-    "airline": "Air France",
+    "airline": "Lufthansa",
     "from": "BOM",
-    "to": "PVG",
-    "date": "2026-05-10",
-    "departureTime": "20:09",
-    "arrivalTime": "06:08",
-    "price": 122958
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "SIN",
-    "date": "2026-05-09",
-    "departureTime": "20:43",
-    "arrivalTime": "11:04",
-    "price": 19786
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "CPH",
-    "date": "2026-05-11",
-    "departureTime": "02:02",
-    "arrivalTime": "23:22",
-    "price": 33194
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "MNL",
-    "date": "2026-05-14",
-    "departureTime": "20:16",
-    "arrivalTime": "04:01",
-    "price": 48014
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "MEX",
-    "date": "2026-05-11",
-    "departureTime": "10:33",
-    "arrivalTime": "07:44",
-    "price": 121893
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "AMS",
-    "date": "2026-05-17",
-    "departureTime": "05:13",
-    "arrivalTime": "04:40",
-    "price": 16697
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "YVR",
-    "date": "2026-05-19",
-    "departureTime": "16:54",
-    "arrivalTime": "14:20",
-    "price": 98338
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "PRG",
-    "date": "2026-05-29",
-    "departureTime": "12:17",
-    "arrivalTime": "17:02",
-    "price": 17381
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "DXB",
-    "date": "2026-05-10",
-    "departureTime": "14:13",
-    "arrivalTime": "15:37",
-    "price": 115545
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "IAD",
-    "date": "2026-05-10",
-    "departureTime": "23:32",
-    "arrivalTime": "05:01",
-    "price": 59309
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "MXP",
+    "to": "RUH",
     "date": "2026-05-27",
-    "departureTime": "10:39",
-    "arrivalTime": "16:05",
-    "price": 56339
+    "departureTime": "19:29",
+    "arrivalTime": "00:50",
+    "prices": {
+      "economy": 15359,
+      "economyPlus": 23038,
+      "business": 53756
+    }
   },
   {
-    "airline": "Air India",
+    "airline": "Qatar Airways",
     "from": "BOM",
-    "to": "RPR",
-    "date": "2026-05-04",
-    "departureTime": "01:27",
-    "arrivalTime": "04:23",
-    "price": 104088
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "SEA",
-    "date": "2026-05-03",
-    "departureTime": "23:05",
-    "arrivalTime": "17:26",
-    "price": 66400
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "KTM",
-    "date": "2026-05-04",
-    "departureTime": "02:14",
-    "arrivalTime": "02:04",
-    "price": 113512
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "JDH",
+    "to": "CUN",
     "date": "2026-05-16",
-    "departureTime": "20:00",
-    "arrivalTime": "17:28",
-    "price": 73347
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "PVG",
-    "date": "2026-05-26",
-    "departureTime": "04:50",
-    "arrivalTime": "14:07",
-    "price": 75620
+    "departureTime": "09:16",
+    "arrivalTime": "16:51",
+    "prices": {
+      "economy": 76699,
+      "economyPlus": 115048,
+      "business": 268446
+    }
   },
   {
     "airline": "Air France",
+    "from": "BOM",
+    "to": "OSL",
+    "date": "2026-05-16",
+    "departureTime": "11:33",
+    "arrivalTime": "00:04",
+    "prices": {
+      "economy": 34647,
+      "economyPlus": 51970,
+      "business": 121264
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "LIS",
+    "date": "2026-05-19",
+    "departureTime": "23:37",
+    "arrivalTime": "07:11",
+    "prices": {
+      "economy": 41595,
+      "economyPlus": 62392,
+      "business": 145582
+    }
+  },
+  {
+    "airline": "Vistara",
     "from": "BOM",
     "to": "DUB",
-    "date": "2026-05-09",
-    "departureTime": "05:14",
-    "arrivalTime": "04:28",
-    "price": 35454
-  },
-  {
-    "airline": "IndiGo",
-    "from": "BOM",
-    "to": "NAG",
-    "date": "2026-05-01",
-    "departureTime": "07:49",
-    "arrivalTime": "07:04",
-    "price": 143385
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "ARN",
-    "date": "2026-05-01",
-    "departureTime": "23:55",
-    "arrivalTime": "18:42",
-    "price": 113138
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "MIA",
-    "date": "2026-05-27",
-    "departureTime": "05:07",
-    "arrivalTime": "02:27",
-    "price": 63245
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "IAD",
-    "date": "2026-05-08",
-    "departureTime": "12:06",
-    "arrivalTime": "05:27",
-    "price": 53089
+    "date": "2026-05-02",
+    "departureTime": "07:02",
+    "arrivalTime": "12:50",
+    "prices": {
+      "economy": 39509,
+      "economyPlus": 59263,
+      "business": 138281
+    }
   },
   {
     "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "FCO",
-    "date": "2026-05-16",
-    "departureTime": "09:03",
-    "arrivalTime": "13:46",
-    "price": 78761
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "GRU",
-    "date": "2026-05-25",
-    "departureTime": "00:21",
-    "arrivalTime": "20:30",
-    "price": 126357
-  },
-  {
-    "airline": "British Airways",
     "from": "BOM",
     "to": "CMN",
-    "date": "2026-05-08",
-    "departureTime": "00:35",
-    "arrivalTime": "21:28",
-    "price": 130752
+    "date": "2026-05-11",
+    "departureTime": "00:33",
+    "arrivalTime": "16:35",
+    "prices": {
+      "economy": 41481,
+      "economyPlus": 62221,
+      "business": 145183
+    }
   },
   {
-    "airline": "Vistara",
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "BLR",
+    "date": "2026-05-03",
+    "departureTime": "23:16",
+    "arrivalTime": "01:01",
+    "prices": {
+      "economy": 5726,
+      "economyPlus": 8589,
+      "business": 20041
+    }
+  },
+  {
+    "airline": "Air India",
     "from": "BOM",
     "to": "AMM",
-    "date": "2026-05-27",
-    "departureTime": "20:01",
-    "arrivalTime": "08:58",
-    "price": 66316
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "JDH",
-    "date": "2026-05-05",
-    "departureTime": "02:42",
-    "arrivalTime": "21:17",
-    "price": 69238
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "SIN",
-    "date": "2026-05-07",
-    "departureTime": "15:05",
-    "arrivalTime": "16:16",
-    "price": 121580
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "PNQ",
-    "date": "2026-05-07",
-    "departureTime": "04:00",
-    "arrivalTime": "06:21",
-    "price": 109663
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "PNQ",
-    "date": "2026-05-07",
-    "departureTime": "04:27",
-    "arrivalTime": "21:08",
-    "price": 4379
-  },
-  {
-    "airline": "Emirates",
-    "from": "BOM",
-    "to": "SFO",
-    "date": "2026-05-22",
-    "departureTime": "10:13",
-    "arrivalTime": "20:35",
-    "price": 119802
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "JFK",
-    "date": "2026-05-18",
-    "departureTime": "19:00",
-    "arrivalTime": "12:05",
-    "price": 20995
-  },
-  {
-    "airline": "Emirates",
-    "from": "BOM",
-    "to": "HEL",
-    "date": "2026-05-07",
-    "departureTime": "01:28",
-    "arrivalTime": "19:40",
-    "price": 29551
-  },
-  {
-    "airline": "Emirates",
-    "from": "BOM",
-    "to": "JLR",
-    "date": "2026-05-10",
-    "departureTime": "01:48",
-    "arrivalTime": "14:03",
-    "price": 35195
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "CPT",
-    "date": "2026-05-02",
-    "departureTime": "11:28",
-    "arrivalTime": "16:10",
-    "price": 6605
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "DMM",
-    "date": "2026-05-27",
-    "departureTime": "04:13",
-    "arrivalTime": "06:22",
-    "price": 48921
-  },
-  {
-    "airline": "Air France",
-    "from": "BOM",
-    "to": "AMS",
-    "date": "2026-05-03",
-    "departureTime": "10:13",
-    "arrivalTime": "03:39",
-    "price": 11557
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "TLV",
     "date": "2026-05-26",
-    "departureTime": "14:19",
-    "arrivalTime": "13:52",
-    "price": 108511
+    "departureTime": "12:38",
+    "arrivalTime": "08:38",
+    "prices": {
+      "economy": 21197,
+      "economyPlus": 31795,
+      "business": 74189
+    }
   },
   {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "OTP",
-    "date": "2026-05-16",
-    "departureTime": "12:24",
-    "arrivalTime": "19:22",
-    "price": 126736
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "GVA",
-    "date": "2026-05-04",
-    "departureTime": "17:57",
-    "arrivalTime": "22:27",
-    "price": 102532
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "BOS",
-    "date": "2026-05-05",
-    "departureTime": "12:53",
-    "arrivalTime": "12:21",
-    "price": 121197
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "JAI",
-    "date": "2026-05-01",
-    "departureTime": "12:48",
-    "arrivalTime": "10:37",
-    "price": 44740
-  },
-  {
-    "airline": "Air India",
+    "airline": "Air France",
     "from": "BOM",
     "to": "ATQ",
-    "date": "2026-05-10",
-    "departureTime": "07:27",
-    "arrivalTime": "22:29",
-    "price": 79609
+    "date": "2026-05-20",
+    "departureTime": "02:35",
+    "arrivalTime": "16:29",
+    "prices": {
+      "economy": 8553,
+      "economyPlus": 12829,
+      "business": 29935
+    }
   },
   {
-    "airline": "Lufthansa",
+    "airline": "Qatar Airways",
     "from": "BOM",
-    "to": "JDH",
-    "date": "2026-05-02",
-    "departureTime": "19:02",
-    "arrivalTime": "04:23",
-    "price": 140338
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "JDH",
-    "date": "2026-05-24",
-    "departureTime": "19:13",
-    "arrivalTime": "15:59",
-    "price": 16599
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "ZRH",
-    "date": "2026-05-03",
-    "departureTime": "04:51",
-    "arrivalTime": "19:43",
-    "price": 6641
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "MAA",
-    "date": "2026-05-09",
-    "departureTime": "17:58",
-    "arrivalTime": "15:52",
-    "price": 63455
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "DEN",
-    "date": "2026-05-17",
-    "departureTime": "19:40",
-    "arrivalTime": "21:48",
-    "price": 93247
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "DEL",
-    "date": "2026-05-17",
-    "departureTime": "18:31",
-    "arrivalTime": "01:32",
-    "price": 25933
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "LIM",
-    "date": "2026-05-06",
-    "departureTime": "12:43",
-    "arrivalTime": "05:31",
-    "price": 46382
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "MUC",
-    "date": "2026-05-10",
-    "departureTime": "11:36",
-    "arrivalTime": "10:13",
-    "price": 8625
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "BOS",
-    "date": "2026-05-19",
-    "departureTime": "21:30",
-    "arrivalTime": "20:19",
-    "price": 93861
-  },
-  {
-    "airline": "Air India",
-    "from": "BOM",
-    "to": "KUL",
-    "date": "2026-05-28",
-    "departureTime": "05:38",
-    "arrivalTime": "18:27",
-    "price": 63906
+    "to": "CMB",
+    "date": "2026-05-23",
+    "departureTime": "17:15",
+    "arrivalTime": "12:33",
+    "prices": {
+      "economy": 9120,
+      "economyPlus": 13680,
+      "business": 31920
+    }
   },
   {
     "airline": "IndiGo",
     "from": "BOM",
-    "to": "EWR",
-    "date": "2026-05-08",
-    "departureTime": "14:02",
-    "arrivalTime": "08:03",
-    "price": 121507
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "HEL",
-    "date": "2026-05-11",
-    "departureTime": "19:44",
-    "arrivalTime": "01:09",
-    "price": 111893
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "DMM",
-    "date": "2026-05-08",
-    "departureTime": "09:56",
-    "arrivalTime": "21:31",
-    "price": 87057
-  },
-  {
-    "airline": "British Airways",
-    "from": "BOM",
-    "to": "OTP",
-    "date": "2026-05-10",
-    "departureTime": "16:46",
-    "arrivalTime": "16:19",
-    "price": 38592
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "KTM",
-    "date": "2026-05-28",
-    "departureTime": "13:39",
-    "arrivalTime": "07:26",
-    "price": 136052
-  },
-  {
-    "airline": "United Airlines",
-    "from": "BOM",
-    "to": "LIM",
-    "date": "2026-05-02",
-    "departureTime": "03:46",
-    "arrivalTime": "16:07",
-    "price": 55682
-  },
-  {
-    "airline": "Qatar Airways",
-    "from": "BOM",
-    "to": "SEA",
-    "date": "2026-05-18",
-    "departureTime": "12:34",
-    "arrivalTime": "13:34",
-    "price": 44108
-  },
-  {
-    "airline": "SpiceJet",
-    "from": "BOM",
-    "to": "BLR",
-    "date": "2026-05-11",
-    "departureTime": "16:44",
-    "arrivalTime": "06:10",
-    "price": 113203
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "AMS",
-    "date": "2026-05-11",
-    "departureTime": "18:05",
-    "arrivalTime": "09:58",
-    "price": 138097
-  },
-  {
-    "airline": "Singapore Airlines",
-    "from": "BOM",
-    "to": "BRU",
-    "date": "2026-05-04",
-    "departureTime": "07:04",
-    "arrivalTime": "21:03",
-    "price": 55965
-  },
-  {
-    "airline": "Vistara",
-    "from": "BOM",
-    "to": "BRU",
-    "date": "2026-05-06",
-    "departureTime": "18:25",
-    "arrivalTime": "13:57",
-    "price": 51270
-  },
-  {
-    "airline": "Lufthansa",
-    "from": "BOM",
-    "to": "TPE",
-    "date": "2026-05-22",
-    "departureTime": "10:55",
-    "arrivalTime": "03:53",
-    "price": 136692
+    "to": "ORD",
+    "date": "2026-05-17",
+    "departureTime": "01:29",
+    "arrivalTime": "05:56",
+    "prices": {
+      "economy": 66224,
+      "economyPlus": 99336,
+      "business": 231784
+    }
   },
   {
     "airline": "United Airlines",
     "from": "BOM",
     "to": "UDR",
+    "date": "2026-05-15",
+    "departureTime": "20:40",
+    "arrivalTime": "07:42",
+    "prices": {
+      "economy": 4591,
+      "economyPlus": 6886,
+      "business": 16068
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "IXB",
+    "date": "2026-05-15",
+    "departureTime": "11:13",
+    "arrivalTime": "13:50",
+    "prices": {
+      "economy": 10457,
+      "economyPlus": 15685,
+      "business": 36599
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "BCN",
+    "date": "2026-05-25",
+    "departureTime": "12:44",
+    "arrivalTime": "17:19",
+    "prices": {
+      "economy": 36695,
+      "economyPlus": 55042,
+      "business": 128432
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "AMS",
+    "date": "2026-05-16",
+    "departureTime": "11:55",
+    "arrivalTime": "15:19",
+    "prices": {
+      "economy": 35804,
+      "economyPlus": 53706,
+      "business": 125314
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "TLV",
+    "date": "2026-05-15",
+    "departureTime": "17:33",
+    "arrivalTime": "10:38",
+    "prices": {
+      "economy": 21743,
+      "economyPlus": 32614,
+      "business": 76100
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "PAT",
+    "date": "2026-05-14",
+    "departureTime": "14:07",
+    "arrivalTime": "06:45",
+    "prices": {
+      "economy": 8766,
+      "economyPlus": 13149,
+      "business": 30681
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "DSS",
+    "date": "2026-05-22",
+    "departureTime": "02:11",
+    "arrivalTime": "00:15",
+    "prices": {
+      "economy": 48872,
+      "economyPlus": 73308,
+      "business": 171052
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "SEA",
+    "date": "2026-05-24",
+    "departureTime": "21:38",
+    "arrivalTime": "10:49",
+    "prices": {
+      "economy": 63817,
+      "economyPlus": 95725,
+      "business": 223359
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "DFW",
+    "date": "2026-05-10",
+    "departureTime": "16:47",
+    "arrivalTime": "21:49",
+    "prices": {
+      "economy": 72185,
+      "economyPlus": 108277,
+      "business": 252647
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "NBO",
+    "date": "2026-05-10",
+    "departureTime": "00:12",
+    "arrivalTime": "00:11",
+    "prices": {
+      "economy": 24166,
+      "economyPlus": 36249,
+      "business": 84581
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "LIM",
+    "date": "2026-05-28",
+    "departureTime": "19:31",
+    "arrivalTime": "02:31",
+    "prices": {
+      "economy": 85056,
+      "economyPlus": 127584,
+      "business": 297696
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "BAH",
+    "date": "2026-05-26",
+    "departureTime": "21:41",
+    "arrivalTime": "18:34",
+    "prices": {
+      "economy": 13571,
+      "economyPlus": 20356,
+      "business": 47498
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "DTW",
+    "date": "2026-05-16",
+    "departureTime": "19:28",
+    "arrivalTime": "22:13",
+    "prices": {
+      "economy": 72185,
+      "economyPlus": 108277,
+      "business": 252647
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "ATQ",
+    "date": "2026-05-30",
+    "departureTime": "00:48",
+    "arrivalTime": "11:12",
+    "prices": {
+      "economy": 8553,
+      "economyPlus": 12829,
+      "business": 29935
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "GIG",
+    "date": "2026-05-05",
+    "departureTime": "06:09",
+    "arrivalTime": "18:44",
+    "prices": {
+      "economy": 68599,
+      "economyPlus": 102898,
+      "business": 240096
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "GOI",
+    "date": "2026-05-08",
+    "departureTime": "18:37",
+    "arrivalTime": "20:34",
+    "prices": {
+      "economy": 3614,
+      "economyPlus": 5421,
+      "business": 12649
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "DFW",
+    "date": "2026-05-20",
+    "departureTime": "00:59",
+    "arrivalTime": "11:25",
+    "prices": {
+      "economy": 72185,
+      "economyPlus": 108277,
+      "business": 252647
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "ACC",
+    "date": "2026-05-25",
+    "departureTime": "06:12",
+    "arrivalTime": "08:36",
+    "prices": {
+      "economy": 41623,
+      "economyPlus": 62434,
+      "business": 145680
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "GRU",
+    "date": "2026-05-19",
+    "departureTime": "21:46",
+    "arrivalTime": "13:18",
+    "prices": {
+      "economy": 70280,
+      "economyPlus": 105420,
+      "business": 245980
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "ZRH",
+    "date": "2026-05-12",
+    "departureTime": "09:34",
+    "arrivalTime": "16:21",
+    "prices": {
+      "economy": 34204,
+      "economyPlus": 51306,
+      "business": 119714
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "BNE",
+    "date": "2026-05-09",
+    "departureTime": "10:49",
+    "arrivalTime": "14:50",
+    "prices": {
+      "economy": 51794,
+      "economyPlus": 77691,
+      "business": 181279
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "JNB",
+    "date": "2026-05-10",
+    "departureTime": "01:24",
+    "arrivalTime": "05:52",
+    "prices": {
+      "economy": 36319,
+      "economyPlus": 54478,
+      "business": 127116
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "OTP",
+    "date": "2026-05-03",
+    "departureTime": "00:32",
+    "arrivalTime": "05:59",
+    "prices": {
+      "economy": 27266,
+      "economyPlus": 40899,
+      "business": 95431
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "JDH",
+    "date": "2026-05-13",
+    "departureTime": "00:41",
+    "arrivalTime": "01:39",
+    "prices": {
+      "economy": 5483,
+      "economyPlus": 8224,
+      "business": 19190
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "DME",
+    "date": "2026-05-29",
+    "departureTime": "08:47",
+    "arrivalTime": "11:31",
+    "prices": {
+      "economy": 26446,
+      "economyPlus": 39669,
+      "business": 92561
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "BHO",
+    "date": "2026-05-07",
+    "departureTime": "22:16",
+    "arrivalTime": "19:31",
+    "prices": {
+      "economy": 4806,
+      "economyPlus": 7209,
+      "business": 16821
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "CMB",
+    "date": "2026-05-19",
+    "departureTime": "13:48",
+    "arrivalTime": "22:26",
+    "prices": {
+      "economy": 9120,
+      "economyPlus": 13680,
+      "business": 31920
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "OPO",
+    "date": "2026-05-15",
+    "departureTime": "16:26",
+    "arrivalTime": "07:29",
+    "prices": {
+      "economy": 41168,
+      "economyPlus": 61752,
+      "business": 144088
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "HEL",
+    "date": "2026-05-29",
+    "departureTime": "21:38",
+    "arrivalTime": "13:09",
+    "prices": {
+      "economy": 33648,
+      "economyPlus": 50472,
+      "business": 117768
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "KUL",
+    "date": "2026-05-10",
+    "departureTime": "10:45",
+    "arrivalTime": "07:54",
+    "prices": {
+      "economy": 19611,
+      "economyPlus": 29416,
+      "business": 68638
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "MEL",
+    "date": "2026-05-10",
+    "departureTime": "16:21",
+    "arrivalTime": "15:54",
+    "prices": {
+      "economy": 50521,
+      "economyPlus": 75781,
+      "business": 176823
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "AKL",
+    "date": "2026-05-07",
+    "departureTime": "04:23",
+    "arrivalTime": "03:18",
+    "prices": {
+      "economy": 63011,
+      "economyPlus": 94516,
+      "business": 220538
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "VTZ",
+    "date": "2026-05-17",
+    "departureTime": "17:38",
+    "arrivalTime": "21:19",
+    "prices": {
+      "economy": 7009,
+      "economyPlus": 10513,
+      "business": 24531
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "BNE",
+    "date": "2026-05-02",
+    "departureTime": "20:33",
+    "arrivalTime": "21:59",
+    "prices": {
+      "economy": 51794,
+      "economyPlus": 77691,
+      "business": 181279
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "BRU",
     "date": "2026-05-27",
-    "departureTime": "16:54",
-    "arrivalTime": "05:57",
-    "price": 135885
+    "departureTime": "20:48",
+    "arrivalTime": "13:39",
+    "prices": {
+      "economy": 35838,
+      "economyPlus": 53757,
+      "business": 125433
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "JLR",
+    "date": "2026-05-28",
+    "departureTime": "19:23",
+    "arrivalTime": "00:52",
+    "prices": {
+      "economy": 5834,
+      "economyPlus": 8751,
+      "business": 20419
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "ACC",
+    "date": "2026-05-07",
+    "departureTime": "05:17",
+    "arrivalTime": "17:52",
+    "prices": {
+      "economy": 41623,
+      "economyPlus": 62434,
+      "business": 145680
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "VNS",
+    "date": "2026-05-25",
+    "departureTime": "05:19",
+    "arrivalTime": "23:18",
+    "prices": {
+      "economy": 7745,
+      "economyPlus": 11617,
+      "business": 27107
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "OPO",
+    "date": "2026-05-29",
+    "departureTime": "21:03",
+    "arrivalTime": "04:08",
+    "prices": {
+      "economy": 41168,
+      "economyPlus": 61752,
+      "business": 144088
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "SCL",
+    "date": "2026-05-25",
+    "departureTime": "07:23",
+    "arrivalTime": "01:13",
+    "prices": {
+      "economy": 81914,
+      "economyPlus": 122871,
+      "business": 286699
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "CMN",
+    "date": "2026-05-25",
+    "departureTime": "20:30",
+    "arrivalTime": "14:10",
+    "prices": {
+      "economy": 41481,
+      "economyPlus": 62221,
+      "business": 145183
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "EZE",
+    "date": "2026-05-25",
+    "departureTime": "02:08",
+    "arrivalTime": "04:58",
+    "prices": {
+      "economy": 76230,
+      "economyPlus": 114345,
+      "business": 266805
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "DTW",
+    "date": "2026-05-17",
+    "departureTime": "06:46",
+    "arrivalTime": "02:32",
+    "prices": {
+      "economy": 72185,
+      "economyPlus": 108277,
+      "business": 252647
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "DSS",
+    "date": "2026-05-30",
+    "departureTime": "19:28",
+    "arrivalTime": "16:59",
+    "prices": {
+      "economy": 48872,
+      "economyPlus": 73308,
+      "business": 171052
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "IDR",
+    "date": "2026-05-24",
+    "departureTime": "03:45",
+    "arrivalTime": "12:36",
+    "prices": {
+      "economy": 4049,
+      "economyPlus": 6073,
+      "business": 14171
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "DEL",
+    "date": "2026-05-04",
+    "departureTime": "11:47",
+    "arrivalTime": "01:16",
+    "prices": {
+      "economy": 7266,
+      "economyPlus": 10899,
+      "business": 25431
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "FRA",
+    "date": "2026-05-24",
+    "departureTime": "08:16",
+    "arrivalTime": "23:23",
+    "prices": {
+      "economy": 34353,
+      "economyPlus": 51529,
+      "business": 120235
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "IXB",
+    "date": "2026-05-01",
+    "departureTime": "23:30",
+    "arrivalTime": "13:05",
+    "prices": {
+      "economy": 10457,
+      "economyPlus": 15685,
+      "business": 36599
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "ADD",
+    "date": "2026-05-30",
+    "departureTime": "07:23",
+    "arrivalTime": "11:14",
+    "prices": {
+      "economy": 20677,
+      "economyPlus": 31015,
+      "business": 72369
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "SYD",
+    "date": "2026-05-14",
+    "departureTime": "00:55",
+    "arrivalTime": "16:26",
+    "prices": {
+      "economy": 69057,
+      "economyPlus": 103585,
+      "business": 241699
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "SCL",
+    "date": "2026-05-22",
+    "departureTime": "19:55",
+    "arrivalTime": "21:14",
+    "prices": {
+      "economy": 81914,
+      "economyPlus": 122871,
+      "business": 286699
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "IXR",
+    "date": "2026-05-04",
+    "departureTime": "23:23",
+    "arrivalTime": "03:53",
+    "prices": {
+      "economy": 8363,
+      "economyPlus": 12544,
+      "business": 29270
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "HYD",
+    "date": "2026-05-01",
+    "departureTime": "02:31",
+    "arrivalTime": "06:19",
+    "prices": {
+      "economy": 4607,
+      "economyPlus": 6910,
+      "business": 16124
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "DXB",
+    "date": "2026-05-09",
+    "departureTime": "23:08",
+    "arrivalTime": "03:01",
+    "prices": {
+      "economy": 11175,
+      "economyPlus": 16762,
+      "business": 39112
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "IXB",
+    "date": "2026-05-26",
+    "departureTime": "17:48",
+    "arrivalTime": "04:52",
+    "prices": {
+      "economy": 10457,
+      "economyPlus": 15685,
+      "business": 36599
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "DXB",
+    "date": "2026-05-12",
+    "departureTime": "21:33",
+    "arrivalTime": "00:16",
+    "prices": {
+      "economy": 11175,
+      "economyPlus": 16762,
+      "business": 39112
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "SFO",
+    "date": "2026-05-20",
+    "departureTime": "02:16",
+    "arrivalTime": "07:43",
+    "prices": {
+      "economy": 69057,
+      "economyPlus": 103585,
+      "business": 241699
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "OSL",
+    "date": "2026-05-30",
+    "departureTime": "11:26",
+    "arrivalTime": "04:05",
+    "prices": {
+      "economy": 34647,
+      "economyPlus": 51970,
+      "business": 121264
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "BOS",
+    "date": "2026-05-03",
+    "departureTime": "21:55",
+    "arrivalTime": "07:35",
+    "prices": {
+      "economy": 62720,
+      "economyPlus": 94080,
+      "business": 219520
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "VIE",
+    "date": "2026-05-06",
+    "departureTime": "07:45",
+    "arrivalTime": "21:04",
+    "prices": {
+      "economy": 31303,
+      "economyPlus": 46954,
+      "business": 109560
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "DMM",
+    "date": "2026-05-09",
+    "departureTime": "16:27",
+    "arrivalTime": "21:33",
+    "prices": {
+      "economy": 14002,
+      "economyPlus": 21003,
+      "business": 49007
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "FCO",
+    "date": "2026-05-24",
+    "departureTime": "14:21",
+    "arrivalTime": "07:56",
+    "prices": {
+      "economy": 32474,
+      "economyPlus": 48711,
+      "business": 113659
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "UDR",
+    "date": "2026-05-26",
+    "departureTime": "16:50",
+    "arrivalTime": "14:27",
+    "prices": {
+      "economy": 4591,
+      "economyPlus": 6886,
+      "business": 16068
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "BHO",
+    "date": "2026-05-19",
+    "departureTime": "07:46",
+    "arrivalTime": "05:29",
+    "prices": {
+      "economy": 4806,
+      "economyPlus": 7209,
+      "business": 16821
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "WAW",
+    "date": "2026-05-17",
+    "departureTime": "11:28",
+    "arrivalTime": "02:50",
+    "prices": {
+      "economy": 30407,
+      "economyPlus": 45610,
+      "business": 106424
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "IXB",
+    "date": "2026-05-16",
+    "departureTime": "09:01",
+    "arrivalTime": "16:01",
+    "prices": {
+      "economy": 10457,
+      "economyPlus": 15685,
+      "business": 36599
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "IAD",
+    "date": "2026-05-22",
+    "departureTime": "00:52",
+    "arrivalTime": "15:58",
+    "prices": {
+      "economy": 65808,
+      "economyPlus": 98712,
+      "business": 230328
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "EZE",
+    "date": "2026-05-06",
+    "departureTime": "07:30",
+    "arrivalTime": "07:46",
+    "prices": {
+      "economy": 76230,
+      "economyPlus": 114345,
+      "business": 266805
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "CAI",
+    "date": "2026-05-24",
+    "departureTime": "13:17",
+    "arrivalTime": "03:06",
+    "prices": {
+      "economy": 23214,
+      "economyPlus": 34821,
+      "business": 81249
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "RPR",
+    "date": "2026-05-21",
+    "departureTime": "07:46",
+    "arrivalTime": "09:41",
+    "prices": {
+      "economy": 6224,
+      "economyPlus": 9336,
+      "business": 21784
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "MCO",
+    "date": "2026-05-09",
+    "departureTime": "04:30",
+    "arrivalTime": "17:41",
+    "prices": {
+      "economy": 71741,
+      "economyPlus": 107611,
+      "business": 251093
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "LIM",
+    "date": "2026-05-25",
+    "departureTime": "03:02",
+    "arrivalTime": "06:57",
+    "prices": {
+      "economy": 85056,
+      "economyPlus": 127584,
+      "business": 297696
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "ATL",
+    "date": "2026-05-15",
+    "departureTime": "12:02",
+    "arrivalTime": "12:47",
+    "prices": {
+      "economy": 69892,
+      "economyPlus": 104838,
+      "business": 244622
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "DFW",
+    "date": "2026-05-17",
+    "departureTime": "20:54",
+    "arrivalTime": "00:36",
+    "prices": {
+      "economy": 72185,
+      "economyPlus": 108277,
+      "business": 252647
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "CUN",
+    "date": "2026-05-13",
+    "departureTime": "10:51",
+    "arrivalTime": "17:00",
+    "prices": {
+      "economy": 76699,
+      "economyPlus": 115048,
+      "business": 268446
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "MUC",
+    "date": "2026-05-06",
+    "departureTime": "17:09",
+    "arrivalTime": "17:19",
+    "prices": {
+      "economy": 33073,
+      "economyPlus": 49609,
+      "business": 115755
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "CCU",
+    "date": "2026-05-01",
+    "departureTime": "08:21",
+    "arrivalTime": "06:38",
+    "prices": {
+      "economy": 9774,
+      "economyPlus": 14661,
+      "business": 34209
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "NBO",
+    "date": "2026-05-26",
+    "departureTime": "18:03",
+    "arrivalTime": "11:45",
+    "prices": {
+      "economy": 24166,
+      "economyPlus": 36249,
+      "business": 84581
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "LHR",
+    "date": "2026-05-03",
+    "departureTime": "10:05",
+    "arrivalTime": "22:18",
+    "prices": {
+      "economy": 37571,
+      "economyPlus": 56356,
+      "business": 131498
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "SVO",
+    "date": "2026-05-14",
+    "departureTime": "02:18",
+    "arrivalTime": "03:06",
+    "prices": {
+      "economy": 26765,
+      "economyPlus": 40147,
+      "business": 93677
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "IXB",
+    "date": "2026-05-08",
+    "departureTime": "17:54",
+    "arrivalTime": "00:39",
+    "prices": {
+      "economy": 10457,
+      "economyPlus": 15685,
+      "business": 36599
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "ATL",
+    "date": "2026-05-02",
+    "departureTime": "13:51",
+    "arrivalTime": "22:22",
+    "prices": {
+      "economy": 69892,
+      "economyPlus": 104838,
+      "business": 244622
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "IDR",
+    "date": "2026-05-06",
+    "departureTime": "11:46",
+    "arrivalTime": "16:18",
+    "prices": {
+      "economy": 4049,
+      "economyPlus": 6073,
+      "business": 14171
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "GAU",
+    "date": "2026-05-19",
+    "departureTime": "20:21",
+    "arrivalTime": "19:57",
+    "prices": {
+      "economy": 11931,
+      "economyPlus": 17896,
+      "business": 41758
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "GAU",
+    "date": "2026-05-05",
+    "departureTime": "01:30",
+    "arrivalTime": "03:08",
+    "prices": {
+      "economy": 11931,
+      "economyPlus": 17896,
+      "business": 41758
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "BOG",
+    "date": "2026-05-19",
+    "departureTime": "11:47",
+    "arrivalTime": "12:06",
+    "prices": {
+      "economy": 79204,
+      "economyPlus": 118806,
+      "business": 277214
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "BCN",
+    "date": "2026-05-27",
+    "departureTime": "06:47",
+    "arrivalTime": "03:44",
+    "prices": {
+      "economy": 36695,
+      "economyPlus": 55042,
+      "business": 128432
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "WAW",
+    "date": "2026-05-18",
+    "departureTime": "19:44",
+    "arrivalTime": "06:13",
+    "prices": {
+      "economy": 30407,
+      "economyPlus": 45610,
+      "business": 106424
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "BBI",
+    "date": "2026-05-13",
+    "departureTime": "09:51",
+    "arrivalTime": "12:28",
+    "prices": {
+      "economy": 8309,
+      "economyPlus": 12463,
+      "business": 29081
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "PAT",
+    "date": "2026-05-13",
+    "departureTime": "08:19",
+    "arrivalTime": "06:28",
+    "prices": {
+      "economy": 8766,
+      "economyPlus": 13149,
+      "business": 30681
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "DME",
+    "date": "2026-05-04",
+    "departureTime": "19:46",
+    "arrivalTime": "00:46",
+    "prices": {
+      "economy": 26446,
+      "economyPlus": 39669,
+      "business": 92561
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "MEX",
+    "date": "2026-05-26",
+    "departureTime": "00:12",
+    "arrivalTime": "16:56",
+    "prices": {
+      "economy": 79718,
+      "economyPlus": 119577,
+      "business": 279013
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "AMD",
+    "date": "2026-05-20",
+    "departureTime": "18:18",
+    "arrivalTime": "19:42",
+    "prices": {
+      "economy": 3699,
+      "economyPlus": 5548,
+      "business": 12946
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "CMB",
+    "date": "2026-05-04",
+    "departureTime": "22:45",
+    "arrivalTime": "10:02",
+    "prices": {
+      "economy": 9120,
+      "economyPlus": 13680,
+      "business": 31920
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "EZE",
+    "date": "2026-05-26",
+    "departureTime": "18:23",
+    "arrivalTime": "20:47",
+    "prices": {
+      "economy": 76230,
+      "economyPlus": 114345,
+      "business": 266805
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "IXB",
+    "date": "2026-05-21",
+    "departureTime": "06:19",
+    "arrivalTime": "12:59",
+    "prices": {
+      "economy": 10457,
+      "economyPlus": 15685,
+      "business": 36599
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "ZRH",
+    "date": "2026-05-14",
+    "departureTime": "20:38",
+    "arrivalTime": "05:24",
+    "prices": {
+      "economy": 34204,
+      "economyPlus": 51306,
+      "business": 119714
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "SYD",
+    "date": "2026-05-07",
+    "departureTime": "15:57",
+    "arrivalTime": "20:47",
+    "prices": {
+      "economy": 69057,
+      "economyPlus": 103585,
+      "business": 241699
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "ICN",
+    "date": "2026-05-04",
+    "departureTime": "20:03",
+    "arrivalTime": "00:58",
+    "prices": {
+      "economy": 29234,
+      "economyPlus": 43851,
+      "business": 102319
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "DEL",
+    "date": "2026-05-21",
+    "departureTime": "16:46",
+    "arrivalTime": "03:41",
+    "prices": {
+      "economy": 7266,
+      "economyPlus": 10899,
+      "business": 25431
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "BOS",
+    "date": "2026-05-04",
+    "departureTime": "07:13",
+    "arrivalTime": "05:11",
+    "prices": {
+      "economy": 62720,
+      "economyPlus": 94080,
+      "business": 219520
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "COK",
+    "date": "2026-05-24",
+    "departureTime": "05:29",
+    "arrivalTime": "11:17",
+    "prices": {
+      "economy": 6900,
+      "economyPlus": 10350,
+      "business": 24150
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "BUD",
+    "date": "2026-05-13",
+    "departureTime": "17:46",
+    "arrivalTime": "06:49",
+    "prices": {
+      "economy": 30247,
+      "economyPlus": 45370,
+      "business": 105864
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "BHO",
+    "date": "2026-05-14",
+    "departureTime": "03:47",
+    "arrivalTime": "17:38",
+    "prices": {
+      "economy": 4806,
+      "economyPlus": 7209,
+      "business": 16821
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "LAX",
+    "date": "2026-05-05",
+    "departureTime": "15:56",
+    "arrivalTime": "22:42",
+    "prices": {
+      "economy": 71498,
+      "economyPlus": 107247,
+      "business": 250243
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "DOH",
+    "date": "2026-05-10",
+    "departureTime": "21:04",
+    "arrivalTime": "14:59",
+    "prices": {
+      "economy": 13002,
+      "economyPlus": 19503,
+      "business": 45507
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "JDH",
+    "date": "2026-05-17",
+    "departureTime": "17:48",
+    "arrivalTime": "21:25",
+    "prices": {
+      "economy": 5483,
+      "economyPlus": 8224,
+      "business": 19190
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "ACC",
+    "date": "2026-05-06",
+    "departureTime": "12:44",
+    "arrivalTime": "03:39",
+    "prices": {
+      "economy": 41623,
+      "economyPlus": 62434,
+      "business": 145680
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "CAI",
+    "date": "2026-05-07",
+    "departureTime": "04:42",
+    "arrivalTime": "22:24",
+    "prices": {
+      "economy": 23214,
+      "economyPlus": 34821,
+      "business": 81249
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "FCO",
+    "date": "2026-05-17",
+    "departureTime": "15:01",
+    "arrivalTime": "03:52",
+    "prices": {
+      "economy": 32474,
+      "economyPlus": 48711,
+      "business": 113659
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "PTY",
+    "date": "2026-05-25",
+    "departureTime": "10:06",
+    "arrivalTime": "17:55",
+    "prices": {
+      "economy": 79758,
+      "economyPlus": 119637,
+      "business": 279153
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "JNB",
+    "date": "2026-05-09",
+    "departureTime": "02:16",
+    "arrivalTime": "17:58",
+    "prices": {
+      "economy": 36319,
+      "economyPlus": 54478,
+      "business": 127116
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "SFO",
+    "date": "2026-05-28",
+    "departureTime": "10:58",
+    "arrivalTime": "02:19",
+    "prices": {
+      "economy": 69057,
+      "economyPlus": 103585,
+      "business": 241699
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "COK",
+    "date": "2026-05-12",
+    "departureTime": "22:30",
+    "arrivalTime": "02:02",
+    "prices": {
+      "economy": 6900,
+      "economyPlus": 10350,
+      "business": 24150
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "CDG",
+    "date": "2026-05-20",
+    "departureTime": "10:24",
+    "arrivalTime": "16:49",
+    "prices": {
+      "economy": 36477,
+      "economyPlus": 54715,
+      "business": 127669
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "SEA",
+    "date": "2026-05-02",
+    "departureTime": "08:57",
+    "arrivalTime": "17:52",
+    "prices": {
+      "economy": 63817,
+      "economyPlus": 95725,
+      "business": 223359
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "IXC",
+    "date": "2026-05-05",
+    "departureTime": "00:22",
+    "arrivalTime": "02:24",
+    "prices": {
+      "economy": 8271,
+      "economyPlus": 12406,
+      "business": 28948
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "BNE",
+    "date": "2026-05-13",
+    "departureTime": "04:39",
+    "arrivalTime": "10:53",
+    "prices": {
+      "economy": 51794,
+      "economyPlus": 77691,
+      "business": 181279
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "BOS",
+    "date": "2026-05-05",
+    "departureTime": "18:05",
+    "arrivalTime": "02:26",
+    "prices": {
+      "economy": 62720,
+      "economyPlus": 94080,
+      "business": 219520
+    }
+  },
+  {
+    "airline": "Air France",
+    "from": "BOM",
+    "to": "LIS",
+    "date": "2026-05-02",
+    "departureTime": "10:51",
+    "arrivalTime": "20:13",
+    "prices": {
+      "economy": 41595,
+      "economyPlus": 62392,
+      "business": 145582
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "CMN",
+    "date": "2026-05-17",
+    "departureTime": "03:51",
+    "arrivalTime": "07:56",
+    "prices": {
+      "economy": 41481,
+      "economyPlus": 62221,
+      "business": 145183
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "OSL",
+    "date": "2026-05-10",
+    "departureTime": "11:32",
+    "arrivalTime": "02:36",
+    "prices": {
+      "economy": 34647,
+      "economyPlus": 51970,
+      "business": 121264
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "LIS",
+    "date": "2026-05-02",
+    "departureTime": "00:13",
+    "arrivalTime": "07:36",
+    "prices": {
+      "economy": 41595,
+      "economyPlus": 62392,
+      "business": 145582
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "NRT",
+    "date": "2026-05-07",
+    "departureTime": "10:12",
+    "arrivalTime": "20:46",
+    "prices": {
+      "economy": 35430,
+      "economyPlus": 53145,
+      "business": 124005
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "BLR",
+    "date": "2026-05-30",
+    "departureTime": "06:00",
+    "arrivalTime": "09:43",
+    "prices": {
+      "economy": 5726,
+      "economyPlus": 8589,
+      "business": 20041
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "LKO",
+    "date": "2026-05-26",
+    "departureTime": "17:31",
+    "arrivalTime": "14:58",
+    "prices": {
+      "economy": 7473,
+      "economyPlus": 11209,
+      "business": 26155
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "ZRH",
+    "date": "2026-05-07",
+    "departureTime": "22:06",
+    "arrivalTime": "02:12",
+    "prices": {
+      "economy": 34204,
+      "economyPlus": 51306,
+      "business": 119714
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "CGK",
+    "date": "2026-05-22",
+    "departureTime": "11:11",
+    "arrivalTime": "03:11",
+    "prices": {
+      "economy": 24705,
+      "economyPlus": 37057,
+      "business": 86467
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "MAA",
+    "date": "2026-05-30",
+    "departureTime": "06:11",
+    "arrivalTime": "13:47",
+    "prices": {
+      "economy": 6665,
+      "economyPlus": 9997,
+      "business": 23327
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "YVR",
+    "date": "2026-05-26",
+    "departureTime": "18:21",
+    "arrivalTime": "12:02",
+    "prices": {
+      "economy": 62795,
+      "economyPlus": 94192,
+      "business": 219782
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "NAG",
+    "date": "2026-05-24",
+    "departureTime": "04:00",
+    "arrivalTime": "23:23",
+    "prices": {
+      "economy": 4940,
+      "economyPlus": 7410,
+      "business": 17290
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "LIM",
+    "date": "2026-05-29",
+    "departureTime": "03:36",
+    "arrivalTime": "02:25",
+    "prices": {
+      "economy": 85056,
+      "economyPlus": 127584,
+      "business": 297696
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "IST",
+    "date": "2026-05-13",
+    "departureTime": "10:55",
+    "arrivalTime": "19:34",
+    "prices": {
+      "economy": 25681,
+      "economyPlus": 38521,
+      "business": 89883
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "IDR",
+    "date": "2026-05-03",
+    "departureTime": "05:25",
+    "arrivalTime": "09:57",
+    "prices": {
+      "economy": 4049,
+      "economyPlus": 6073,
+      "business": 14171
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "IXR",
+    "date": "2026-05-03",
+    "departureTime": "16:52",
+    "arrivalTime": "20:03",
+    "prices": {
+      "economy": 8363,
+      "economyPlus": 12544,
+      "business": 29270
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "BBI",
+    "date": "2026-05-21",
+    "departureTime": "12:46",
+    "arrivalTime": "20:18",
+    "prices": {
+      "economy": 8309,
+      "economyPlus": 12463,
+      "business": 29081
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "MCO",
+    "date": "2026-05-15",
+    "departureTime": "05:32",
+    "arrivalTime": "06:14",
+    "prices": {
+      "economy": 71741,
+      "economyPlus": 107611,
+      "business": 251093
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "ATH",
+    "date": "2026-05-17",
+    "departureTime": "12:27",
+    "arrivalTime": "19:55",
+    "prices": {
+      "economy": 27254,
+      "economyPlus": 40881,
+      "business": 95389
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "JNB",
+    "date": "2026-05-11",
+    "departureTime": "23:56",
+    "arrivalTime": "05:44",
+    "prices": {
+      "economy": 36319,
+      "economyPlus": 54478,
+      "business": 127116
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "IXC",
+    "date": "2026-05-25",
+    "departureTime": "22:20",
+    "arrivalTime": "10:27",
+    "prices": {
+      "economy": 8271,
+      "economyPlus": 12406,
+      "business": 28948
+    }
+  },
+  {
+    "airline": "United Airlines",
+    "from": "BOM",
+    "to": "ORD",
+    "date": "2026-05-27",
+    "departureTime": "01:13",
+    "arrivalTime": "22:34",
+    "prices": {
+      "economy": 66224,
+      "economyPlus": 99336,
+      "business": 231784
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "MEL",
+    "date": "2026-05-10",
+    "departureTime": "13:42",
+    "arrivalTime": "02:06",
+    "prices": {
+      "economy": 50521,
+      "economyPlus": 75781,
+      "business": 176823
+    }
+  },
+  {
+    "airline": "Air India",
+    "from": "BOM",
+    "to": "MAD",
+    "date": "2026-05-23",
+    "departureTime": "07:15",
+    "arrivalTime": "00:05",
+    "prices": {
+      "economy": 39098,
+      "economyPlus": 58647,
+      "business": 136843
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "GIG",
+    "date": "2026-05-01",
+    "departureTime": "00:22",
+    "arrivalTime": "07:43",
+    "prices": {
+      "economy": 68599,
+      "economyPlus": 102898,
+      "business": 240096
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "MAA",
+    "date": "2026-05-24",
+    "departureTime": "23:12",
+    "arrivalTime": "02:12",
+    "prices": {
+      "economy": 6665,
+      "economyPlus": 9997,
+      "business": 23327
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "CMB",
+    "date": "2026-05-13",
+    "departureTime": "22:25",
+    "arrivalTime": "17:46",
+    "prices": {
+      "economy": 9120,
+      "economyPlus": 13680,
+      "business": 31920
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "MNL",
+    "date": "2026-05-19",
+    "departureTime": "09:43",
+    "arrivalTime": "22:14",
+    "prices": {
+      "economy": 19611,
+      "economyPlus": 29416,
+      "business": 68638
+    }
+  },
+  {
+    "airline": "Qatar Airways",
+    "from": "BOM",
+    "to": "EZE",
+    "date": "2026-05-06",
+    "departureTime": "17:02",
+    "arrivalTime": "18:00",
+    "prices": {
+      "economy": 76230,
+      "economyPlus": 114345,
+      "business": 266805
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "JLR",
+    "date": "2026-05-28",
+    "departureTime": "13:31",
+    "arrivalTime": "17:06",
+    "prices": {
+      "economy": 5834,
+      "economyPlus": 8751,
+      "business": 20419
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "JED",
+    "date": "2026-05-01",
+    "departureTime": "19:58",
+    "arrivalTime": "20:32",
+    "prices": {
+      "economy": 19100,
+      "economyPlus": 28650,
+      "business": 66850
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "BKK",
+    "date": "2026-05-20",
+    "departureTime": "22:56",
+    "arrivalTime": "12:41",
+    "prices": {
+      "economy": 16647,
+      "economyPlus": 24970,
+      "business": 58264
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "JDH",
+    "date": "2026-05-03",
+    "departureTime": "02:02",
+    "arrivalTime": "17:47",
+    "prices": {
+      "economy": 5483,
+      "economyPlus": 8224,
+      "business": 19190
+    }
+  },
+  {
+    "airline": "Vistara",
+    "from": "BOM",
+    "to": "ATQ",
+    "date": "2026-05-12",
+    "departureTime": "23:56",
+    "arrivalTime": "23:45",
+    "prices": {
+      "economy": 8553,
+      "economyPlus": 12829,
+      "business": 29935
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "IDR",
+    "date": "2026-05-23",
+    "departureTime": "12:00",
+    "arrivalTime": "11:18",
+    "prices": {
+      "economy": 4049,
+      "economyPlus": 6073,
+      "business": 14171
+    }
+  },
+  {
+    "airline": "Lufthansa",
+    "from": "BOM",
+    "to": "ATQ",
+    "date": "2026-05-23",
+    "departureTime": "21:15",
+    "arrivalTime": "06:01",
+    "prices": {
+      "economy": 8553,
+      "economyPlus": 12829,
+      "business": 29935
+    }
+  },
+  {
+    "airline": "Emirates",
+    "from": "BOM",
+    "to": "TPE",
+    "date": "2026-05-05",
+    "departureTime": "20:56",
+    "arrivalTime": "19:52",
+    "prices": {
+      "economy": 26508,
+      "economyPlus": 39762,
+      "business": 92778
+    }
+  },
+  {
+    "airline": "British Airways",
+    "from": "BOM",
+    "to": "TPE",
+    "date": "2026-05-28",
+    "departureTime": "12:09",
+    "arrivalTime": "06:19",
+    "prices": {
+      "economy": 26508,
+      "economyPlus": 39762,
+      "business": 92778
+    }
+  },
+  {
+    "airline": "SpiceJet",
+    "from": "BOM",
+    "to": "NAG",
+    "date": "2026-05-12",
+    "departureTime": "20:23",
+    "arrivalTime": "08:13",
+    "prices": {
+      "economy": 4940,
+      "economyPlus": 7410,
+      "business": 17290
+    }
+  },
+  {
+    "airline": "Singapore Airlines",
+    "from": "BOM",
+    "to": "IAH",
+    "date": "2026-05-13",
+    "departureTime": "01:01",
+    "arrivalTime": "13:40",
+    "prices": {
+      "economy": 73575,
+      "economyPlus": 110362,
+      "business": 257512
+    }
+  },
+  {
+    "airline": "IndiGo",
+    "from": "BOM",
+    "to": "DME",
+    "date": "2026-05-30",
+    "departureTime": "10:31",
+    "arrivalTime": "20:52",
+    "prices": {
+      "economy": 26446,
+      "economyPlus": 39669,
+      "business": 92561
+    }
   }
 ];
 
