@@ -11,13 +11,19 @@
 //       navigate('/flights', { state: { flights: data, query: { from, to, date } } })
 // ─────────────────────────────────────────────────────────────────────────────
 
+import NetworkMap from '../components/NetworkMap/NetworkMap'
+
 function SearchPage() {
-  return (
-    <div style={{ padding: '60px 20px', textAlign: 'center' }}>
-      <h1>🔍 Search Flights</h1>
-      <p style={{ color: 'var(--text)' }}>
-        Student 1 — replace this file with your search form.
-      </p>
+    <div>
+      <div style={{ padding: '60px 20px', textAlign: 'center' }}>
+        <h1>🔍 Search Flights</h1>
+        <p style={{ color: 'var(--text)' }}>
+          Student 1 — replace this file with your search form.
+        </p>
+      </div>
+      
+      {/* Flight Network Map (Student 2 / UI Upgrade) */}
+      <NetworkMap />
     </div>
   )
 }
