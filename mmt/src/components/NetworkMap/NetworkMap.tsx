@@ -14,46 +14,7 @@ import './NetworkMap.css'
 
 const API_BASE = 'http://localhost:3000'
 
-// ── Coordinates Mapping ────────────────────────────────────────────────────────
-// React-simple-maps expects [longitude, latitude]
-const coords: Record<string, [number, number]> = {
-  BOM: [72.8777, 19.0760],   // Mumbai (HUB)
-  DEL: [77.1025, 28.7041],   // Delhi
-  BLR: [77.5946, 12.9716],   // Bangalore
-  CCU: [88.3639, 22.5726],   // Kolkata
-  HYD: [78.4867, 17.3850],   // Hyderabad
-  MAA: [80.2707, 13.0827],   // Chennai
-  PNQ: [73.8567, 18.5204],   // Pune
-  GOI: [73.8180, 15.3803],   // Goa
-  DXB: [55.2708, 25.2048],   // Dubai
-  JFK: [-73.7781, 40.6413],  // New York
-  LHR: [-0.4543, 51.4700],   // London
-  SIN: [103.9915, 1.3644],   // Singapore
-  FRA: [8.5706, 50.0333],    // Frankfurt
-  DOH: [51.5310, 25.2854],   // Doha
-  BKK: [100.7501, 13.6900],  // Bangkok
-  CDG: [2.5479, 49.0097],    // Paris
-  AUH: [54.6511, 24.4329],   // Abu Dhabi
-  KUL: [101.7054, 2.7456],   // Kuala Lumpur
-  HKG: [113.9145, 22.3080],  // Hong Kong
-  EWR: [-74.1745, 40.6895],  // Newark
-  SFO: [-122.3790, 37.6213], // San Francisco
-  CMB: [79.8833, 7.1805],    // Colombo
-  KTM: [85.3562, 27.6973],   // Kathmandu
-}
-
-// ── Region Mapping ────────────────────────────────────────────────────────────
-// Maps a destination code to a specific region filter category
-const regionMap: Record<string, string> = {
-  DEL: 'Asia Pacific', BLR: 'Asia Pacific', CCU: 'Asia Pacific', HYD: 'Asia Pacific', 
-  MAA: 'Asia Pacific', PNQ: 'Asia Pacific', GOI: 'Asia Pacific', SIN: 'Asia Pacific', 
-  BKK: 'Asia Pacific', KUL: 'Asia Pacific', HKG: 'Asia Pacific', CMB: 'Asia Pacific', 
-  KTM: 'Asia Pacific',
-  DXB: 'Middle East', DOH: 'Middle East', AUH: 'Middle East',
-  LHR: 'Europe', FRA: 'Europe', CDG: 'Europe',
-  JFK: 'Americas', EWR: 'Americas', SFO: 'Americas',
-  // No African destinations in dummy data right now, but region pill will exist
-}
+import { coords, regionMap } from './cities'
 
 const REGIONS = ['All', 'Middle East', 'Europe', 'Asia Pacific', 'Africa', 'Americas']
 
@@ -155,17 +116,27 @@ export default function NetworkMap() {
 
               return (
                 <g key={flight._id}>
-                  {/* Curved path */}
+                  {/* Invisible thick path for precise hitbox */}
+                  <Line
+                    from={coords.BOM}
+                    to={destCoords}
+                    stroke="transparent"
+                    strokeWidth={15}
+                    strokeLinecap="round"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => handleFlightClick(flight)}
+                    onMouseEnter={() => setHoveredFlight(flight)}
+                    onMouseLeave={() => setHoveredFlight(null)}
+                  />
+
+                  {/* Visible thin path */}
                   <Line
                     from={coords.BOM}
                     to={destCoords}
                     stroke={lineColor}
                     strokeWidth={isHovered ? 2 : 1}
                     strokeLinecap="round"
-                    style={{ transition: 'stroke 0.2s', cursor: 'pointer' }}
-                    onClick={() => handleFlightClick(flight)}
-                    onMouseEnter={() => setHoveredFlight(flight)}
-                    onMouseLeave={() => setHoveredFlight(null)}
+                    style={{ transition: 'stroke 0.2s', pointerEvents: 'none' }}
                   />
                   
                   {/* Destination Marker */}
