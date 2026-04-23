@@ -2,6 +2,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
+import authMiddleware from "./middlewares/authMiddleware.js";
+import { connectToDatabase, createCollections } from "./db.js";
 
 const app = express();
 
@@ -25,6 +27,17 @@ app.get("/home", (req, res) => {
     </html>
   `);
 });
+app.get("/app", authMiddleware, (req, res) => {
+  res.send("protected bitch");
+});
 app.use("/api/auth", authRoutes);
 
-app.listen(3000, () => console.log("Server running"));
+app.listen(3000, async () => {
+  console.log("Server running");
+  try {
+    await connectToDatabase();
+    await createCollections();
+  } catch (error) {
+    console.error("Failed to connect to database:", error);
+  }
+});
