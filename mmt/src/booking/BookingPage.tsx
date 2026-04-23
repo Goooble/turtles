@@ -9,8 +9,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
+import { useAuth } from '../context/AuthContext'
 interface Flight {
   _id: string
   airline: string
@@ -48,6 +49,7 @@ interface LocationState {
 function BookingPage() {
   const location = useLocation()
   const navigate = useNavigate()
+  const { user, loading: authLoading } = useAuth()
 
   // Pull the selected flight from router state
   const state = location.state as LocationState | null
@@ -107,8 +109,8 @@ function BookingPage() {
 
     const payload: BookingPayload = {
       flightId: flight._id,
-      // userId comes from localStorage after Student 4's login flow saves it there
-      userId: localStorage.getItem('userId'),
+      // userId comes from AuthContext
+      userId: user!._id,
       passenger: {
         name: passenger.name.trim(),
         age: Number(passenger.age),
@@ -165,6 +167,16 @@ function BookingPage() {
   return (
     <div className="booking-page">
       <h1 className="page-title">Complete Your Booking</h1>
+
+      {!user && !authLoading && (
+        <div className="auth-required-banner">
+          <p>Please log in or sign up to complete this booking.</p>
+          <div className="auth-required-actions">
+            <Link to="/login" className="btn-primary">Log In</Link>
+            <Link to="/signup" className="btn-secondary">Sign Up</Link>
+          </div>
+        </div>
+      )}
 
       {/* ── Flight Summary Card ─────────────────────────────────────────── */}
       <section className="flight-card" aria-label="Selected flight details">
@@ -264,7 +276,7 @@ function BookingPage() {
             <button
               type="submit"
               className="btn-primary btn-submit"
-              disabled={loading}
+              disabled={loading || !user}
             >
               {loading ? 'Confirming…' : 'Confirm Booking'}
             </button>

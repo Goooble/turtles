@@ -57,4 +57,24 @@ router.post('/', async (req, res) => {
   }
 });
 
+// ─── GET /user/:userId ──────────────────────────────────────────────────────────
+// Returns all bookings for a given user, populated with flight details.
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    if (!userId) {
+      return res.status(400).json({ error: 'userId is required' });
+    }
+
+    const userBookings = await Booking.find({ userId })
+      .populate('flightId')
+      .sort({ createdAt: -1 });
+
+    res.json(userBookings);
+  } catch (error) {
+    console.error('Error fetching user bookings:', error);
+    res.status(500).json({ error: 'Failed to fetch user bookings' });
+  }
+});
+
 export default router;
