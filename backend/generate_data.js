@@ -240,6 +240,10 @@ ${cities.map(c => `  ${c.code}: [${c.lng}, ${c.lat}],`).join('\n')}
 export const regionMap: Record<string, string> = {
 ${cities.map(c => `  ${c.code}: '${c.region}',`).join('\n')}
 };
+
+export const cityNames: Record<string, string> = {
+${cities.map(c => `  ${c.code}: '${c.name}',`).join('\n')}
+};
 `;
 
 const citiesTsPath = path.join(process.cwd(), '../mmt/src/components/NetworkMap/cities.ts');

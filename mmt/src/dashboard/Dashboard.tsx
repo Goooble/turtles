@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
 import type { Flight } from '../types'
 import './Dashboard.css'
+import { formatLocation } from '../utils/flightHelpers'
 
 interface BookingData {
   _id: string
@@ -77,16 +78,16 @@ export default function Dashboard() {
                 <div className="ticket-route">
                   <div className="ticket-point">
                     <span className="point-time">{booking.flightId.departureTime}</span>
-                    <span className="point-code">{booking.flightId.from}</span>
+                    <span className="point-code" style={{ fontSize: '0.85rem' }}>{formatLocation(booking.flightId.from)}</span>
                   </div>
                   
                   <div className="ticket-divider">
                     <span className="plane-icon">✈️</span>
                   </div>
                   
-                  <div className="ticket-point">
+                  <div className="ticket-point" style={{ textAlign: 'right' }}>
                     <span className="point-time">{booking.flightId.arrivalTime}</span>
-                    <span className="point-code">{booking.flightId.to}</span>
+                    <span className="point-code" style={{ fontSize: '0.85rem' }}>{formatLocation(booking.flightId.to)}</span>
                   </div>
                 </div>
 

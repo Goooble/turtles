@@ -29,6 +29,7 @@ interface BookingPayload {
   passenger: { name: string; age: number }
 }
 import './BookingPage.css'
+import { formatLocation } from '../utils/flightHelpers'
 
 // ── Backend base URL.  Change this if your backend runs on a different port. ──
 const API_BASE = 'http://localhost:3000'
@@ -142,8 +143,8 @@ function BookingPage() {
           <div className="success-checkmark">✓</div>
           <h2>Booking Confirmed!</h2>
           <p>
-            Your flight from <strong>{flight.from}</strong> to{' '}
-            <strong>{flight.to}</strong> has been booked successfully.
+            Your flight from <strong>{formatLocation(flight.from)}</strong> to{' '}
+            <strong>{formatLocation(flight.to)}</strong> has been booked successfully.
           </p>
           <p className="success-detail">
             Passenger: <strong>{passenger.name}</strong>
@@ -188,11 +189,11 @@ function BookingPage() {
           </div>
           <div className="flight-field">
             <span className="field-label">From</span>
-            <span className="field-value">{flight.from}</span>
+            <span className="field-value">{formatLocation(flight.from)}</span>
           </div>
           <div className="flight-field">
             <span className="field-label">To</span>
-            <span className="field-value">{flight.to}</span>
+            <span className="field-value">{formatLocation(flight.to)}</span>
           </div>
           <div className="flight-field">
             <span className="field-label">Date</span>

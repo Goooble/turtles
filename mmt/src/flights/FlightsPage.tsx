@@ -15,6 +15,7 @@ import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import type { Flight } from '../types'
 import './FlightsPage.css'
+import { formatLocation } from '../utils/flightHelpers'
 
 // ── Backend base URL ──────────────────────────────────────────────────────────
 const API_BASE = 'http://localhost:3000'
@@ -175,7 +176,7 @@ function FlightsPage() {
                   <div className="fp-card__route">
                     <div className="fp-card__city">
                       <span className="fp-card__code">{flight.from}</span>
-                      <span className="fp-card__city-label">Origin</span>
+                      <span className="fp-card__city-label">{formatLocation(flight.from)}</span>
                     </div>
 
                     <svg className="fp-card__arrow-svg" viewBox="0 0 80 14" aria-hidden="true">
@@ -185,7 +186,7 @@ function FlightsPage() {
 
                     <div className="fp-card__city fp-card__city--right">
                       <span className="fp-card__code">{flight.to}</span>
-                      <span className="fp-card__city-label">Destination</span>
+                      <span className="fp-card__city-label">{formatLocation(flight.to)}</span>
                     </div>
                   </div>
 
