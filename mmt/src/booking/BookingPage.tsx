@@ -11,7 +11,22 @@
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import type { Flight, BookingPayload } from '../types'
+interface Flight {
+  _id: string
+  airline: string
+  from: string
+  to: string
+  date: string
+  departureTime: string
+  arrivalTime: string
+  price: number
+}
+
+interface BookingPayload {
+  flightId: string
+  userId: string | null
+  passenger: { name: string; age: number }
+}
 import './BookingPage.css'
 
 // ── Backend base URL.  Change this if your backend runs on a different port. ──
