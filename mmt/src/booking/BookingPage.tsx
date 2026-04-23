@@ -31,7 +31,7 @@ interface BookingPayload {
 import './BookingPage.css'
 
 // ── Backend base URL.  Change this if your backend runs on a different port. ──
-const API_BASE = 'http://localhost:5000'
+const API_BASE = 'http://localhost:3000'
 
 // ── Local shape for the passenger form fields ──────────────────────────────
 interface PassengerForm {

@@ -34,7 +34,7 @@ export default function Dashboard() {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/booking/user/${user?._id}`)
+      const res = await axios.get(`http://localhost:3000/booking/user/${user?._id}`)
       setBookings(res.data)
     } catch (err) {
       setError('Failed to load your bookings.')
