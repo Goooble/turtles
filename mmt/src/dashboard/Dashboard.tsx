@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
-import type { Flight } from '../../types'
+import type { Flight } from '../types'
 import './Dashboard.css'
 
 interface BookingData {
