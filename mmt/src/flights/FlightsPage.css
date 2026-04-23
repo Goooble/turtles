@@ -1,0 +1,288 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   FlightsPage.css  ·  Student 2's Flights listing page
+   Uses the same CSS variables defined in index.css so dark-mode works for free.
+   Airline accent colour is injected via --accent CSS custom property per card.
+───────────────────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ── Page wrapper ─────────────────────────────────────────────────────────── */
+.fp-page {
+  min-height: 100vh;
+  background: var(--bg, #f0f4ff);
+  font-family: 'Inter', var(--sans, sans-serif);
+  color: var(--text-h, #1a1a2e);
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.fp-header {
+  background: linear-gradient(135deg, #1a237e 0%, #283593 60%, #3949ab 100%);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(26, 35, 126, 0.4);
+}
+
+.fp-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fp-header__plane {
+  font-size: 1.5rem;
+}
+
+.fp-header__title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.fp-header__route-pill {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.15);
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.4px;
+}
+
+/* ── Main ─────────────────────────────────────────────────────────────────── */
+.fp-main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.fp-heading {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin: 0 0 1.5rem;
+}
+
+/* ── Status states (loading / error / empty) ──────────────────────────────── */
+.fp-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 4rem 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  text-align: center;
+  color: var(--text, #555);
+}
+
+.fp-status--error { border-left: 4px solid #e53935; }
+.fp-status--empty { border-left: 4px solid #fb8c00; }
+
+.fp-status__icon { font-size: 2.5rem; }
+.fp-status__sub  { font-size: 0.85rem; color: #888; margin: 0; }
+
+/* Spinner */
+.fp-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid #e8eaf6;
+  border-top-color: #3949ab;
+  border-radius: 50%;
+  animation: fp-spin 0.75s linear infinite;
+}
+
+@keyframes fp-spin { to { transform: rotate(360deg); } }
+
+/* ── Flight list ──────────────────────────────────────────────────────────── */
+.fp-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Flight card ──────────────────────────────────────────────────────────── */
+.fp-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  overflow: hidden;
+  border-left: 5px solid var(--accent, #2563eb);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fp-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+}
+
+/* Airline strip */
+.fp-card__strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.25rem;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--accent, #2563eb) 12%, transparent),
+    transparent
+  );
+}
+
+.fp-card__plane-icon {
+  font-size: 1rem;
+  color: var(--accent, #2563eb);
+}
+
+.fp-card__airline {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--accent, #1a1a2e);
+  letter-spacing: 0.3px;
+}
+
+/* Route section */
+.fp-card__route {
+  display: flex;
+  align-items: center;
+  padding: 1.1rem 1.5rem 0.6rem;
+  gap: 0.5rem;
+}
+
+.fp-card__city {
+  display: flex;
+  flex-direction: column;
+  min-width: 4rem;
+}
+
+.fp-card__city--right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.fp-card__code {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.fp-card__city-label {
+  font-size: 0.68rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.fp-card__arrow-svg {
+  flex: 1;
+  height: 14px;
+  color: #ccc;
+  min-width: 40px;
+}
+
+/* Details row */
+.fp-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem 1.5rem;
+  padding: 0.75rem 1.5rem 0;
+  border-top: 1px dashed #e8eaf6;
+}
+
+.fp-card__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fp-card__detail-label {
+  font-size: 0.7rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.fp-card__detail-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.fp-card__detail--price {
+  margin-left: auto;
+  align-items: flex-end;
+}
+
+.fp-card__price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--accent, #2563eb);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+/* Book button */
+.fp-card__book-btn {
+  display: block;
+  width: calc(100% - 3rem);
+  margin: 1rem 1.5rem 1.25rem;
+  padding: 0.8rem;
+  background: var(--accent, #2563eb);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: filter 0.18s, transform 0.15s;
+}
+
+.fp-card__book-btn:hover {
+  filter: brightness(1.1);
+  transform: scale(1.01);
+}
+
+.fp-card__book-btn:active {
+  transform: scale(0.98);
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .fp-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .fp-card__code {
+    font-size: 1.3rem;
+  }
+
+  .fp-card__route {
+    padding: 1rem 1rem 0.5rem;
+  }
+
+  .fp-card__details {
+    padding: 0.75rem 1rem;
+    gap: 0.75rem 1rem;
+  }
+
+  .fp-card__book-btn {
+    width: calc(100% - 2rem);
+    margin: 0.75rem 1rem 1rem;
+  }
+}
